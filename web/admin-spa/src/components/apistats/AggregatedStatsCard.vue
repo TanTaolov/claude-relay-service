@@ -19,7 +19,7 @@
           <span class="truncate font-medium text-gray-700 dark:text-gray-300">
             {{ stat.name || `Key ${index + 1}` }}
           </span>
-          <span class="text-xs text-gray-600 dark:text-gray-400">
+          <span class="text-xs font-mono text-gray-600 dark:text-gray-400">
             {{ calculatePercentage(stat) }}%
           </span>
         </div>
@@ -31,7 +31,7 @@
           />
         </div>
         <div
-          class="mt-1 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400"
+          class="mt-1 flex items-center justify-between text-xs font-mono text-gray-500 dark:text-gray-400"
         >
           <span>{{ formatNumber(getStatUsage(stat)?.requests || 0) }}次</span>
           <span>{{ getStatUsage(stat)?.formattedCost || '$0.00' }}</span>

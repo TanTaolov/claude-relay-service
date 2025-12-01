@@ -1,50 +1,50 @@
 /* 从原始 style.css 复制的全局样式 */
 :root {
   /* 亮色模式 */
-  --primary-color: #667eea;
-  --secondary-color: #764ba2;
-  --accent-color: #f093fb;
+  --primary-color: #0ea5e9; /* Tech Blue */
+  --secondary-color: #6366f1; /* Indigo */
+  --accent-color: #8b5cf6; /* Violet */
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --error-color: #ef4444;
   --surface-color: rgba(255, 255, 255, 0.95);
   --glass-color: rgba(255, 255, 255, 0.1);
   --glass-strong-color: rgba(255, 255, 255, 0.95);
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
   --border-color: rgba(255, 255, 255, 0.2);
-  --bg-gradient-start: #667eea;
-  --bg-gradient-mid: #764ba2;
-  --bg-gradient-end: #f093fb;
+  --bg-gradient-start: #f0f9ff;
+  --bg-gradient-mid: #e0f2fe;
+  --bg-gradient-end: #bae6fd;
   --input-bg: rgba(255, 255, 255, 0.9);
   --input-border: rgba(209, 213, 219, 0.8);
   --modal-bg: rgba(0, 0, 0, 0.4);
   --table-bg: rgba(255, 255, 255, 0.95);
-  --table-hover: rgba(102, 126, 234, 0.05);
+  --table-hover: rgba(14, 165, 233, 0.05);
 }
 
 .dark {
-  /* 暗黑模式 */
-  --primary-color: #818cf8;
-  --secondary-color: #a78bfa;
-  --accent-color: #c084fc;
-  --success-color: #10b981;
-  --warning-color: #f59e0b;
-  --error-color: #ef4444;
-  --surface-color: rgba(31, 41, 55, 0.95);
-  --glass-color: rgba(0, 0, 0, 0.2);
-  --glass-strong-color: rgba(31, 41, 55, 0.95);
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --border-color: rgba(75, 85, 99, 0.3);
-  --bg-gradient-start: #1f2937;
-  --bg-gradient-mid: #374151;
-  --bg-gradient-end: #4b5563;
-  --input-bg: rgba(31, 41, 55, 0.9);
-  --input-border: rgba(75, 85, 99, 0.5);
-  --modal-bg: rgba(0, 0, 0, 0.6);
-  --table-bg: rgba(31, 41, 55, 0.95);
-  --table-hover: rgba(129, 140, 248, 0.1);
+  /* 暗黑模式 - 科技风 */
+  --primary-color: #38bdf8; /* Sky 400 */
+  --secondary-color: #818cf8; /* Indigo 400 */
+  --accent-color: #c084fc; /* Purple 400 */
+  --success-color: #34d399;
+  --warning-color: #fbbf24;
+  --error-color: #f87171;
+  --surface-color: rgba(15, 23, 42, 0.8); /* Slate 900 with opacity */
+  --glass-color: rgba(15, 23, 42, 0.6);
+  --glass-strong-color: rgba(15, 23, 42, 0.95);
+  --text-primary: #f0f9ff;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(56, 189, 248, 0.2); /* Tech blue border */
+  --bg-gradient-start: #020617; /* Slate 950 */
+  --bg-gradient-mid: #0f172a; /* Slate 900 */
+  --bg-gradient-end: #1e293b; /* Slate 800 */
+  --input-bg: rgba(15, 23, 42, 0.6);
+  --input-border: rgba(56, 189, 248, 0.3);
+  --modal-bg: rgba(0, 0, 0, 0.7);
+  --table-bg: rgba(15, 23, 42, 0.8);
+  --table-hover: rgba(56, 189, 248, 0.1);
 }
 
 /* 优化后的transition - 避免布局跳动 */
@@ -69,6 +69,7 @@ textarea {
 
 body {
   font-family:
+    'Outfit',
     'Inter',
     -apple-system,
     BlinkMacSystemFont,
@@ -99,38 +100,37 @@ body::before {
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(circle at 20% 80%, rgba(240, 147, 251, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(102, 126, 234, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, rgba(56, 189, 248, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(129, 140, 248, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(192, 132, 252, 0.1) 0%, transparent 50%);
   pointer-events: none;
   z-index: -1;
 }
 
 .glass {
   background: var(--glass-color);
-  /* 降低模糊强度 */
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition:
     background-color 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .dark .glass {
   box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.25),
-    0 10px 10px -5px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 0 15px rgba(56, 189, 248, 0.1),
+    inset 0 0 20px rgba(56, 189, 248, 0.05);
+  border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .glass-strong {
   background: var(--glass-strong-color);
-  /* 降低模糊强度 */
-  /* 移除模糊效果 */
+  backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
   box-shadow:
     0 10px 15px -3px rgba(0, 0, 0, 0.1),
@@ -142,8 +142,8 @@ body::before {
 
 .dark .glass-strong {
   box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 20px 40px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(56, 189, 248, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 

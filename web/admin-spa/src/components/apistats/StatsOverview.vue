@@ -560,7 +560,7 @@ const getCodexWindowLabel = (type) => (type === 'secondary' ? '周限' : '5h')
 }
 
 .info-value {
-  @apply mt-2 text-sm text-slate-800 dark:text-slate-100;
+  @apply mt-2 text-sm font-mono text-slate-800 dark:text-slate-100;
 }
 
 .contributor-item {
@@ -576,7 +576,7 @@ const getCodexWindowLabel = (type) => (type === 'secondary' ? '周限' : '5h')
 }
 
 .metric-value {
-  @apply text-xl font-semibold md:text-2xl;
+  @apply text-xl font-semibold font-mono md:text-2xl;
 }
 
 .metric-label {

@@ -10,7 +10,7 @@
       <transition mode="out-in" name="fade">
         <i v-if="themeStore.themeMode === 'light'" key="sun" class="fas fa-sun" />
         <i v-else-if="themeStore.themeMode === 'dark'" key="moon" class="fas fa-moon" />
-        <i v-else key="auto" class="fas fa-circle-half-stroke" />
+        <i v-else key="auto" class="fas fa-adjust" />
       </transition>
     </button>
 
@@ -43,7 +43,7 @@
           <div class="handle-icon">
             <i v-if="themeStore.themeMode === 'light'" class="fas fa-sun" />
             <i v-else-if="themeStore.themeMode === 'dark'" class="fas fa-moon" />
-            <i v-else class="fas fa-circle-half-stroke" />
+            <i v-else class="fas fa-adjust" />
           </div>
         </div>
       </button>
@@ -106,7 +106,7 @@ const themeOptions = [
     value: 'auto',
     label: '跟随系统',
     shortLabel: '自动',
-    icon: 'fas fa-circle-half-stroke'
+    icon: 'fas fa-adjust'
   }
 ]
 
@@ -185,7 +185,7 @@ const selectTheme = (mode) => {
   @apply text-indigo-500;
 }
 
-.theme-toggle-button i.fa-circle-half-stroke {
+.theme-toggle-button i.fa-adjust {
   background: linear-gradient(90deg, #60a5fa 0%, #2563eb 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -424,7 +424,7 @@ const selectTheme = (mode) => {
   filter: drop-shadow(0 0 3px rgba(251, 191, 36, 0.5));
 }
 
-.handle-icon .fa-circle-half-stroke {
+.handle-icon .fa-adjust {
   color: rgba(255, 255, 255, 0.9);
   filter: drop-shadow(0 0 4px rgba(167, 139, 250, 0.5));
   font-size: 15px;

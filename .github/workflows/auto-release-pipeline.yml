@@ -170,8 +170,10 @@ jobs:
         echo "Building frontend for version ${{ steps.next_version.outputs.new_version }}..."
         cd web/admin-spa
         npm ci
-        npm run build
+        npm run build -- --mode production
         echo "Frontend build completed"
+      env:
+        CI: false
 
     - name: Push Frontend Build to web-dist Branch
       if: steps.check.outputs.needs_bump == 'true'

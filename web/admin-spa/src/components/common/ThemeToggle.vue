@@ -264,7 +264,9 @@ const selectTheme = (mode) => {
 
 /* 滑块位置 */
 .theme-switch.is-dark .switch-handle {
-  transform: translateX(34px); /* 移动距离 = 容器宽度(68) - 滑块宽度(26) - padding(3*2) - offset adjustment */
+  transform: translateX(
+    34px
+  ); /* 移动距离 = 容器宽度(68) - 滑块宽度(26) - padding(3*2) - offset adjustment */
 }
 
 .theme-switch.is-auto .switch-handle {
@@ -324,7 +326,9 @@ const selectTheme = (mode) => {
 /* 过渡动画 */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .fade-enter-from,

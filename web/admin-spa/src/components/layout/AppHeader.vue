@@ -51,10 +51,10 @@
         <!-- 用户菜单 -->
         <div class="user-menu-container relative">
           <button
-            class="user-menu-button flex items-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-95 sm:px-4 sm:py-2.5"
+            class="user-menu-button flex items-center gap-2 rounded-2xl border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl active:scale-95 dark:border-gray-600 dark:bg-gradient-to-r dark:from-blue-500 dark:to-blue-600 dark:text-white sm:px-4 sm:py-2.5"
             @click="userMenuOpen = !userMenuOpen"
           >
-            <i class="fas fa-user-circle text-sm sm:text-base" />
+            <i class="fas fa-user-circle text-sm text-blue-500 dark:text-white sm:text-base" />
             <span class="hidden sm:inline">{{ currentUser.username || 'Admin' }}</span>
             <i
               class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200"

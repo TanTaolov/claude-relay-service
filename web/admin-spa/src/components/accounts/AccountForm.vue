@@ -611,7 +611,7 @@
               >
               <input
                 v-model="form.name"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                 :class="{ 'border-red-500': errors.name }"
                 placeholder="为账户设置一个易识别的名称"
                 required
@@ -628,7 +628,7 @@
               >
               <textarea
                 v-model="form.description"
-                class="form-input text-gray-900 w-full resize-none border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                class="form-input w-full resize-none border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                 placeholder="账户用途说明..."
                 rows="3"
               />
@@ -683,7 +683,7 @@
               >
                 <select
                   v-model="form.expireDuration"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   @change="updateAccountExpireAt"
                 >
                   <option value="">永不过期</option>
@@ -696,7 +696,7 @@
                 <div v-if="form.expireDuration === 'custom'" class="mt-3">
                   <input
                     v-model="form.customExpireDate"
-                    class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                    class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                     :min="minDateTime"
                     type="datetime-local"
                     @change="updateAccountCustomExpireAt"
@@ -778,7 +778,7 @@
               >
               <input
                 v-model="form.projectId"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                 placeholder="例如：verdant-wares-464411-k9"
                 type="text"
               />
@@ -829,7 +829,7 @@
                 >
                 <input
                   v-model="form.accessKeyId"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.accessKeyId }"
                   placeholder="请输入 AWS Access Key ID"
                   required
@@ -846,7 +846,7 @@
                 >
                 <input
                   v-model="form.secretAccessKey"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.secretAccessKey }"
                   placeholder="请输入 AWS Secret Access Key"
                   required
@@ -863,7 +863,7 @@
                 >
                 <input
                   v-model="form.region"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.region }"
                   placeholder="例如：us-east-1"
                   required
@@ -897,7 +897,7 @@
                 >
                 <input
                   v-model="form.sessionToken"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="如果使用临时凭证，请输入会话令牌"
                   type="password"
                 />
@@ -912,7 +912,7 @@
                 >
                 <input
                   v-model="form.defaultModel"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="例如：us.anthropic.claude-sonnet-4-20250514-v1:0"
                   type="text"
                 />
@@ -941,7 +941,7 @@
                 >
                 <input
                   v-model="form.smallFastModel"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="例如：us.anthropic.claude-3-5-haiku-20241022-v1:0"
                   type="text"
                 />
@@ -959,7 +959,7 @@
                 >
                 <input
                   v-model="form.azureEndpoint"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.azureEndpoint }"
                   placeholder="https://your-resource.openai.azure.com"
                   required
@@ -979,7 +979,7 @@
                 >
                 <input
                   v-model="form.apiVersion"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="2024-02-01"
                   type="text"
                 />
@@ -994,7 +994,7 @@
                 >
                 <input
                   v-model="form.deploymentName"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.deploymentName }"
                   placeholder="gpt-4"
                   required
@@ -1014,7 +1014,7 @@
                 >
                 <input
                   v-model="form.apiKey"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.apiKey }"
                   placeholder="请输入 Azure OpenAI API Key"
                   required
@@ -1088,7 +1088,7 @@
                   >
                   <input
                     v-model.number="form.rateLimitDuration"
-                    class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                    class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                     min="1"
                     placeholder="默认60分钟"
                     type="number"
@@ -1111,7 +1111,7 @@
                 >
                 <input
                   v-model="form.apiUrl"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.apiUrl }"
                   placeholder="例如：https://api.example.com"
                   required
@@ -1128,7 +1128,7 @@
                 >
                 <input
                   v-model="form.apiKey"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.apiKey }"
                   placeholder="请输入API Key"
                   required
@@ -1147,7 +1147,7 @@
                   </label>
                   <input
                     v-model.number="form.dailyQuota"
-                    class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                    class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                     min="0"
                     placeholder="0 表示不限制"
                     step="0.01"
@@ -1164,7 +1164,7 @@
                   </label>
                   <input
                     v-model="form.quotaResetTime"
-                    class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                    class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                     placeholder="00:00"
                     type="time"
                   />
@@ -1181,7 +1181,7 @@
                 </label>
                 <input
                   v-model.number="form.maxConcurrentTasks"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   min="0"
                   placeholder="0 表示不限制"
                   type="number"
@@ -1283,14 +1283,14 @@
                     >
                       <input
                         v-model="mapping.from"
-                        class="form-input text-gray-900 flex-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                        class="form-input flex-1 border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                         placeholder="原始模型名称"
                         type="text"
                       />
                       <i class="fas fa-arrow-right text-gray-400 dark:text-gray-500" />
                       <input
                         v-model="mapping.to"
-                        class="form-input text-gray-900 flex-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                        class="form-input flex-1 border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                         placeholder="映射后的模型名称"
                         type="text"
                       />
@@ -1408,7 +1408,7 @@
                 >
                 <input
                   v-model="form.userAgent"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="留空则透传客户端 User-Agent"
                   type="text"
                 />
@@ -1441,7 +1441,7 @@
                   >
                   <input
                     v-model.number="form.rateLimitDuration"
-                    class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                    class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                     min="1"
                     placeholder="默认60分钟"
                     type="number"
@@ -1461,7 +1461,7 @@
                 >
                 <input
                   v-model="form.baseApi"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="https://api.example.com/v1"
                   required
                   type="url"
@@ -1478,7 +1478,7 @@
                 <div class="relative">
                   <input
                     v-model="form.apiKey"
-                    class="form-input text-gray-900 w-full border-gray-300 pr-10 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                    class="form-input w-full border-gray-300 pr-10 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                     placeholder="sk-xxxxxxxxxxxx"
                     required
                     :type="showApiKey ? 'text' : 'password'"
@@ -1502,7 +1502,7 @@
                 >
                 <input
                   v-model="form.userAgent"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="留空则透传原始请求的 User-Agent"
                   type="text"
                 />
@@ -1523,7 +1523,7 @@
                 >
                 <input
                   v-model="form.baseUrl"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500 dark:border-red-400': errors.baseUrl }"
                   placeholder="https://generativelanguage.googleapis.com/v1beta/models"
                   required
@@ -1561,7 +1561,7 @@
                 <div class="relative">
                   <input
                     v-model="form.apiKey"
-                    class="form-input text-gray-900 w-full border-gray-300 pr-10 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                    class="form-input w-full border-gray-300 pr-10 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                     placeholder="AIzaSy..."
                     required
                     :type="showApiKey ? 'text' : 'password'"
@@ -1740,7 +1740,7 @@
               >
               <input
                 v-model.number="form.priority"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                 max="100"
                 min="1"
                 placeholder="数字越小优先级越高，默认50"
@@ -1860,7 +1860,7 @@
                 >
                 <textarea
                   v-model="form.accessToken"
-                  class="form-input text-gray-900 w-full resize-none border-gray-300 font-mono text-xs dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full resize-none border-gray-300 font-mono text-xs text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="可选：如果不填写，系统会自动通过 Refresh Token 获取..."
                   rows="4"
                 />
@@ -1876,7 +1876,7 @@
                 >
                 <textarea
                   v-model="form.accessToken"
-                  class="form-input text-gray-900 w-full resize-none border-gray-300 font-mono text-xs dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full resize-none border-gray-300 font-mono text-xs text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.accessToken }"
                   placeholder="请输入 Access Token..."
                   required
@@ -1893,7 +1893,7 @@
                 >
                 <textarea
                   v-model="form.refreshToken"
-                  class="form-input text-gray-900 w-full resize-none border-gray-300 font-mono text-xs dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full resize-none border-gray-300 font-mono text-xs text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.refreshToken }"
                   placeholder="请输入 Refresh Token（必填）..."
                   required
@@ -1919,7 +1919,7 @@
                 >
                 <textarea
                   v-model="form.refreshToken"
-                  class="form-input text-gray-900 w-full resize-none border-gray-300 font-mono text-xs dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full resize-none border-gray-300 font-mono text-xs text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="请输入 Refresh Token..."
                   rows="4"
                 />
@@ -1954,7 +1954,7 @@
                 >
                 <textarea
                   v-model="form.apiKeysInput"
-                  class="form-input text-gray-900 w-full resize-none border-gray-300 font-mono text-xs dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full resize-none border-gray-300 font-mono text-xs text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.apiKeys }"
                   placeholder="每行一个 API Key，可粘贴多行"
                   required
@@ -2084,7 +2084,7 @@
                           <div v-else class="space-y-3">
                             <div class="flex items-center gap-2">
                               <input
-                                class="form-input text-gray-900 flex-1 bg-gray-50 font-mono text-xs dark:bg-gray-700"
+                                class="form-input flex-1 bg-gray-50 font-mono text-xs text-gray-900 dark:bg-gray-700"
                                 readonly
                                 type="text"
                                 :value="setupTokenAuthUrl"
@@ -2168,7 +2168,7 @@
                               </label>
                               <textarea
                                 v-model="setupTokenAuthCode"
-                                class="form-input text-gray-900 w-full resize-none border-gray-300 font-mono text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                                class="form-input w-full resize-none border-gray-300 font-mono text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                                 placeholder="粘贴从Claude Code授权页面获取的Authorization Code..."
                                 rows="3"
                               />
@@ -2216,7 +2216,7 @@
             >
             <input
               v-model="form.name"
-              class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+              class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
               placeholder="为账户设置一个易识别的名称"
               required
               type="text"
@@ -2229,7 +2229,7 @@
             >
             <textarea
               v-model="form.description"
-              class="form-input text-gray-900 w-full resize-none border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+              class="form-input w-full resize-none border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
               placeholder="账户用途说明..."
               rows="3"
             />
@@ -2284,7 +2284,7 @@
             >
               <select
                 v-model="form.expireDuration"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 @change="updateAccountExpireAt"
               >
                 <option value="">永不过期</option>
@@ -2297,7 +2297,7 @@
               <div v-if="form.expireDuration === 'custom'" class="mt-3">
                 <input
                   v-model="form.customExpireDate"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   :min="minDateTime"
                   type="datetime-local"
                   @change="updateAccountCustomExpireAt"
@@ -2379,7 +2379,7 @@
             >
             <input
               v-model="form.projectId"
-              class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+              class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
               placeholder="例如：verdant-wares-464411-k9"
               type="text"
             />
@@ -2548,7 +2548,7 @@
             >
             <input
               v-model.number="form.priority"
-              class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+              class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
               max="100"
               min="1"
               placeholder="数字越小优先级越高"
@@ -2568,7 +2568,7 @@
               <label class="mb-3 block text-sm font-semibold text-gray-700">API URL</label>
               <input
                 v-model="form.apiUrl"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="例如：https://api.example.com"
                 required
                 type="text"
@@ -2579,7 +2579,7 @@
               <label class="mb-3 block text-sm font-semibold text-gray-700">API Key</label>
               <input
                 v-model="form.apiKey"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="留空表示不更新"
                 type="password"
               />
@@ -2594,7 +2594,7 @@
                 </label>
                 <input
                   v-model.number="form.dailyQuota"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   min="0"
                   placeholder="0 表示不限制"
                   step="0.01"
@@ -2611,7 +2611,7 @@
                 </label>
                 <input
                   v-model="form.quotaResetTime"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   placeholder="00:00"
                   type="time"
                 />
@@ -2662,7 +2662,7 @@
               </label>
               <input
                 v-model.number="form.maxConcurrentTasks"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 min="0"
                 placeholder="0 表示不限制"
                 type="number"
@@ -2764,14 +2764,14 @@
                   >
                     <input
                       v-model="mapping.from"
-                      class="form-input text-gray-900 flex-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                      class="form-input flex-1 border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                       placeholder="原始模型名称"
                       type="text"
                     />
                     <i class="fas fa-arrow-right text-gray-400 dark:text-gray-500" />
                     <input
                       v-model="mapping.to"
-                      class="form-input text-gray-900 flex-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                      class="form-input flex-1 border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                       placeholder="映射后的模型名称"
                       type="text"
                     />
@@ -2889,7 +2889,7 @@
               >
               <input
                 v-model="form.userAgent"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="留空则透传客户端 User-Agent"
                 type="text"
               />
@@ -2920,7 +2920,7 @@
                 >
                 <input
                   v-model.number="form.rateLimitDuration"
-                  class="form-input text-gray-900 w-full"
+                  class="form-input w-full text-gray-900"
                   min="1"
                   type="number"
                 />
@@ -2935,7 +2935,7 @@
               <label class="mb-3 block text-sm font-semibold text-gray-700">API 基础地址</label>
               <input
                 v-model="form.baseApi"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="https://api.example.com/v1"
                 type="url"
               />
@@ -2946,7 +2946,7 @@
               <div class="relative">
                 <input
                   v-model="form.apiKey"
-                  class="form-input text-gray-900 w-full pr-10"
+                  class="form-input w-full pr-10 text-gray-900"
                   placeholder="留空表示不更新"
                   :type="showApiKey ? 'text' : 'password'"
                 />
@@ -2967,7 +2967,7 @@
               >
               <input
                 v-model="form.userAgent"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="留空则透传客户端 User-Agent"
                 type="text"
               />
@@ -2987,7 +2987,7 @@
                 </label>
                 <input
                   v-model.number="form.dailyQuota"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   min="0"
                   placeholder="0 表示不限制"
                   step="0.01"
@@ -3000,7 +3000,7 @@
                 </label>
                 <input
                   v-model="form.quotaResetTime"
-                  class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                  class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   type="time"
                 />
               </div>
@@ -3013,7 +3013,7 @@
               </label>
               <input
                 v-model.number="form.maxConcurrentTasks"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 min="0"
                 placeholder="0 表示不限制"
                 type="number"
@@ -3032,7 +3032,7 @@
               >
               <input
                 v-model="form.baseUrl"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 :class="{ 'border-red-500 dark:border-red-400': errors.baseUrl }"
                 placeholder="https://generativelanguage.googleapis.com/v1beta/models"
                 type="url"
@@ -3069,7 +3069,7 @@
               <div class="relative">
                 <input
                   v-model="form.apiKey"
-                  class="form-input text-gray-900 w-full border-gray-300 pr-10 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                  class="form-input w-full border-gray-300 pr-10 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                   placeholder="留空表示不更新"
                   :type="showApiKey ? 'text' : 'password'"
                 />
@@ -3091,7 +3091,7 @@
               <label class="mb-3 block text-sm font-semibold text-gray-700">AWS 访问密钥 ID</label>
               <input
                 v-model="form.accessKeyId"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="留空表示不更新"
                 type="text"
               />
@@ -3102,7 +3102,7 @@
               <label class="mb-3 block text-sm font-semibold text-gray-700">AWS 秘密访问密钥</label>
               <input
                 v-model="form.secretAccessKey"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="留空表示不更新"
                 type="password"
               />
@@ -3113,7 +3113,7 @@
               <label class="mb-3 block text-sm font-semibold text-gray-700">AWS 区域</label>
               <input
                 v-model="form.region"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="例如：us-east-1"
                 type="text"
               />
@@ -3139,7 +3139,7 @@
               <label class="mb-3 block text-sm font-semibold text-gray-700">会话令牌 (可选)</label>
               <input
                 v-model="form.sessionToken"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="留空表示不更新"
                 type="password"
               />
@@ -3151,7 +3151,7 @@
               >
               <input
                 v-model="form.defaultModel"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="例如：us.anthropic.claude-sonnet-4-20250514-v1:0"
                 type="text"
               />
@@ -3166,7 +3166,7 @@
               >
               <input
                 v-model="form.smallFastModel"
-                class="form-input text-gray-900 w-full"
+                class="form-input w-full text-gray-900"
                 placeholder="例如：us.anthropic.claude-3-5-haiku-20241022-v1:0"
                 type="text"
               />
@@ -3195,7 +3195,7 @@
                 >
                 <input
                   v-model.number="form.rateLimitDuration"
-                  class="form-input text-gray-900 w-full"
+                  class="form-input w-full text-gray-900"
                   min="1"
                   type="number"
                 />
@@ -3212,7 +3212,7 @@
               >
               <input
                 v-model="form.azureEndpoint"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                 :class="{ 'border-red-500': errors.azureEndpoint }"
                 placeholder="https://your-resource.openai.azure.com"
                 type="url"
@@ -3228,7 +3228,7 @@
               >
               <input
                 v-model="form.apiVersion"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                 placeholder="2024-02-01"
                 type="text"
               />
@@ -3243,7 +3243,7 @@
               >
               <input
                 v-model="form.deploymentName"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                 :class="{ 'border-red-500': errors.deploymentName }"
                 placeholder="gpt-4"
                 type="text"
@@ -3259,7 +3259,7 @@
               >
               <input
                 v-model="form.apiKey"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                 :class="{ 'border-red-500': errors.apiKey }"
                 placeholder="留空表示不更新"
                 type="password"
@@ -3343,7 +3343,7 @@
                 >
                 <textarea
                   v-model="form.apiKeysInput"
-                  class="form-input text-gray-900 w-full resize-none border-gray-300 font-mono text-xs dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full resize-none border-gray-300 font-mono text-xs text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   :class="{ 'border-red-500': errors.apiKeys }"
                   placeholder="根据模式填写；每行一个 API Key"
                   rows="6"
@@ -3436,7 +3436,7 @@
                 >
                 <textarea
                   v-model="form.accessToken"
-                  class="form-input text-gray-900 w-full resize-none border-gray-300 font-mono text-xs dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full resize-none border-gray-300 font-mono text-xs text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="留空表示不更新..."
                   rows="4"
                 />
@@ -3448,7 +3448,7 @@
                 >
                 <textarea
                   v-model="form.refreshToken"
-                  class="form-input text-gray-900 w-full resize-none border-gray-300 font-mono text-xs dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input w-full resize-none border-gray-300 font-mono text-xs text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="留空表示不更新..."
                   rows="4"
                 />

@@ -1,10 +1,12 @@
 <template>
-  <div class="card-section p-4 md:p-6 flex flex-col h-full">
+  <div class="card-section flex h-full flex-col p-4 md:p-6">
     <h3
       class="mb-6 flex items-center text-lg font-bold text-slate-800 dark:text-slate-100 md:text-xl"
     >
       <div class="flex items-center gap-3">
-        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400">
+        <div
+          class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400"
+        >
           <i class="fas fa-coins text-lg" />
         </div>
         <div class="flex flex-col">
@@ -15,73 +17,93 @@
         </div>
       </div>
     </h3>
-    
-    <div class="flex-1 flex flex-col justify-center space-y-4">
+
+    <div class="flex flex-1 flex-col justify-center space-y-4">
       <div class="distribution-item group">
-        <div class="flex items-center justify-between mb-1">
+        <div class="mb-1 flex items-center justify-between">
           <span class="flex items-center text-sm font-medium text-slate-600 dark:text-slate-400">
-            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-500 flex items-center justify-center mr-3 dark:bg-emerald-900/20 dark:text-emerald-400">
+            <div
+              class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-500 dark:bg-emerald-900/20 dark:text-emerald-400"
+            >
               <i class="fas fa-arrow-right" />
             </div>
             输入 Token
           </span>
-          <span class="text-sm font-bold font-mono text-slate-800 dark:text-slate-100">
+          <span class="font-mono text-sm font-bold text-slate-800 dark:text-slate-100">
             {{ formatNumber(currentPeriodData.inputTokens) }}
           </span>
         </div>
-        <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden dark:bg-slate-700/50">
-          <div class="h-full bg-emerald-500 rounded-full" :style="{ width: calculatePercentage(currentPeriodData.inputTokens) + '%' }"></div>
+        <div class="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700/50">
+          <div
+            class="h-full rounded-full bg-emerald-500"
+            :style="{ width: calculatePercentage(currentPeriodData.inputTokens) + '%' }"
+          ></div>
         </div>
       </div>
 
       <div class="distribution-item group">
-        <div class="flex items-center justify-between mb-1">
+        <div class="mb-1 flex items-center justify-between">
           <span class="flex items-center text-sm font-medium text-slate-600 dark:text-slate-400">
-            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center mr-3 dark:bg-blue-900/20 dark:text-blue-400">
+            <div
+              class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-blue-500 dark:bg-blue-900/20 dark:text-blue-400"
+            >
               <i class="fas fa-arrow-left" />
             </div>
             输出 Token
           </span>
-          <span class="text-sm font-bold font-mono text-slate-800 dark:text-slate-100">
+          <span class="font-mono text-sm font-bold text-slate-800 dark:text-slate-100">
             {{ formatNumber(currentPeriodData.outputTokens) }}
           </span>
         </div>
-        <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden dark:bg-slate-700/50">
-          <div class="h-full bg-blue-500 rounded-full" :style="{ width: calculatePercentage(currentPeriodData.outputTokens) + '%' }"></div>
+        <div class="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700/50">
+          <div
+            class="h-full rounded-full bg-blue-500"
+            :style="{ width: calculatePercentage(currentPeriodData.outputTokens) + '%' }"
+          ></div>
         </div>
       </div>
 
       <div class="distribution-item group">
-        <div class="flex items-center justify-between mb-1">
+        <div class="mb-1 flex items-center justify-between">
           <span class="flex items-center text-sm font-medium text-slate-600 dark:text-slate-400">
-            <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-500 flex items-center justify-center mr-3 dark:bg-purple-900/20 dark:text-purple-400">
+            <div
+              class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-purple-50 text-purple-500 dark:bg-purple-900/20 dark:text-purple-400"
+            >
               <i class="fas fa-save" />
             </div>
             缓存创建
           </span>
-          <span class="text-sm font-bold font-mono text-slate-800 dark:text-slate-100">
+          <span class="font-mono text-sm font-bold text-slate-800 dark:text-slate-100">
             {{ formatNumber(currentPeriodData.cacheCreateTokens) }}
           </span>
         </div>
-        <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden dark:bg-slate-700/50">
-          <div class="h-full bg-purple-500 rounded-full" :style="{ width: calculatePercentage(currentPeriodData.cacheCreateTokens) + '%' }"></div>
+        <div class="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700/50">
+          <div
+            class="h-full rounded-full bg-purple-500"
+            :style="{ width: calculatePercentage(currentPeriodData.cacheCreateTokens) + '%' }"
+          ></div>
         </div>
       </div>
 
       <div class="distribution-item group">
-        <div class="flex items-center justify-between mb-1">
+        <div class="mb-1 flex items-center justify-between">
           <span class="flex items-center text-sm font-medium text-slate-600 dark:text-slate-400">
-            <div class="w-8 h-8 rounded-lg bg-orange-50 text-orange-500 flex items-center justify-center mr-3 dark:bg-orange-900/20 dark:text-orange-400">
+            <div
+              class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-orange-50 text-orange-500 dark:bg-orange-900/20 dark:text-orange-400"
+            >
               <i class="fas fa-download" />
             </div>
             缓存读取
           </span>
-          <span class="text-sm font-bold font-mono text-slate-800 dark:text-slate-100">
+          <span class="font-mono text-sm font-bold text-slate-800 dark:text-slate-100">
             {{ formatNumber(currentPeriodData.cacheReadTokens) }}
           </span>
         </div>
-        <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden dark:bg-slate-700/50">
-          <div class="h-full bg-orange-500 rounded-full" :style="{ width: calculatePercentage(currentPeriodData.cacheReadTokens) + '%' }"></div>
+        <div class="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700/50">
+          <div
+            class="h-full rounded-full bg-orange-500"
+            :style="{ width: calculatePercentage(currentPeriodData.cacheReadTokens) + '%' }"
+          ></div>
         </div>
       </div>
     </div>
@@ -91,7 +113,7 @@
         <span class="text-sm font-medium text-slate-500 dark:text-slate-400">
           {{ statsPeriod === 'daily' ? '今日' : '本月' }}总计
         </span>
-        <span class="text-xl font-bold font-mono text-slate-800 dark:text-slate-100 tracking-tight">
+        <span class="font-mono text-xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
           {{ formatNumber(currentPeriodData.allTokens) }}
         </span>
       </div>
@@ -138,10 +160,10 @@ const formatNumber = (num) => {
 }
 
 .card-section:hover {
-  @apply shadow-xl transform -translate-y-0.5;
+  @apply -translate-y-0.5 transform shadow-xl;
 }
 
 .distribution-item {
-  @apply p-2 rounded-xl transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50;
+  @apply rounded-xl p-2 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50;
 }
 </style>

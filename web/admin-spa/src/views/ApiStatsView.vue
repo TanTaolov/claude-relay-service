@@ -73,12 +73,14 @@
       <ApiKeyInput />
 
       <!-- 错误提示 -->
-      <div v-if="error" class="mb-6 md:mb-8 animate-shake">
+      <div v-if="error" class="animate-shake mb-6 md:mb-8">
         <div
-          class="rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-800 backdrop-blur-sm dark:border-red-500/20 dark:bg-red-500/20 dark:text-red-200 md:text-base flex items-center shadow-lg"
+          class="flex items-center rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-800 shadow-lg backdrop-blur-sm dark:border-red-500/20 dark:bg-red-500/20 dark:text-red-200 md:text-base"
         >
-          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mr-3 text-red-500">
-             <i class="fas fa-exclamation-triangle" />
+          <div
+            class="mr-3 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-red-100 text-red-500 dark:bg-red-900/30"
+          >
+            <i class="fas fa-exclamation-triangle" />
           </div>
           <div>
             <p class="font-bold">查询出错</p>
@@ -89,59 +91,74 @@
 
       <!-- 统计数据展示区域 -->
       <div v-if="statsData" class="fade-in space-y-6">
-        
         <!-- 工具栏卡片 -->
-        <div class="toolbar-card flex flex-col md:flex-row items-center justify-between gap-4 p-4 rounded-3xl border border-white/20 bg-white/80 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/80">
-           <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
-                <i class="fas fa-clock text-lg" />
-              </div>
-              <div>
-                <span class="block text-sm font-bold text-slate-800 dark:text-slate-100">统计时间范围</span>
-                <span class="block text-xs text-slate-500 dark:text-slate-400">选择查看数据的时间跨度</span>
-              </div>
-           </div>
-           
-           <div class="flex w-full items-center gap-2 md:w-auto bg-slate-100 dark:bg-slate-800/50 p-1 rounded-xl">
-              <button
-                class="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
-                :class="statsPeriod === 'daily' ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200'"
-                :disabled="loading || modelStatsLoading"
-                @click="switchPeriod('daily')"
-              >
-                <i class="fas fa-calendar-day" />
-                今日
-              </button>
-              <button
-                class="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
-                :class="statsPeriod === 'monthly' ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200'"
-                :disabled="loading || modelStatsLoading"
-                @click="switchPeriod('monthly')"
-              >
-                <i class="fas fa-calendar-alt" />
-                本月
-              </button>
-           </div>
-           
-           <!-- 测试按钮 - 仅在单Key模式下显示 -->
-            <button
-              v-if="!multiKeyMode"
-              class="test-btn ml-2 hidden md:flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 hover:scale-105 active:scale-95"
-              :disabled="loading"
-              @click="openTestModal"
+        <div
+          class="toolbar-card flex flex-col items-center justify-between gap-4 rounded-3xl border border-white/20 bg-white/80 p-4 shadow-lg backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/80 md:flex-row"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
             >
-              <i class="fas fa-vial" />
-              <span>连通性测试</span>
+              <i class="fas fa-clock text-lg" />
+            </div>
+            <div>
+              <span class="block text-sm font-bold text-slate-800 dark:text-slate-100"
+                >统计时间范围</span
+              >
+              <span class="block text-xs text-slate-500 dark:text-slate-400"
+                >选择查看数据的时间跨度</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="flex w-full items-center gap-2 rounded-xl bg-slate-100 p-1 dark:bg-slate-800/50 md:w-auto"
+          >
+            <button
+              class="flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300"
+              :class="
+                statsPeriod === 'daily'
+                  ? 'bg-white text-blue-600 shadow-sm dark:bg-slate-700 dark:text-blue-400'
+                  : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200'
+              "
+              :disabled="loading || modelStatsLoading"
+              @click="switchPeriod('daily')"
+            >
+              <i class="fas fa-calendar-day" />
+              今日
             </button>
+            <button
+              class="flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-300"
+              :class="
+                statsPeriod === 'monthly'
+                  ? 'bg-white text-blue-600 shadow-sm dark:bg-slate-700 dark:text-blue-400'
+                  : 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200'
+              "
+              :disabled="loading || modelStatsLoading"
+              @click="switchPeriod('monthly')"
+            >
+              <i class="fas fa-calendar-alt" />
+              本月
+            </button>
+          </div>
+
+          <!-- 测试按钮 - 仅在单Key模式下显示 -->
+          <button
+            v-if="!multiKeyMode"
+            class="test-btn ml-2 hidden items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95 md:flex"
+            :disabled="loading"
+            @click="openTestModal"
+          >
+            <i class="fas fa-vial" />
+            <span>连通性测试</span>
+          </button>
         </div>
 
         <!-- 基本信息和统计概览 -->
         <StatsOverview />
 
         <!-- Token 分布和限制配置 -->
-        <div
-          class="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-2 xl:items-stretch"
-        >
+        <div class="grid grid-cols-1 gap-4 md:gap-6 xl:grid-cols-2 xl:items-stretch">
           <TokenDistribution class="h-full" />
           <template v-if="multiKeyMode">
             <AggregatedStatsCard class="h-full" />
@@ -153,22 +170,22 @@
 
         <!-- 模型使用统计 -->
         <ModelUsageStats />
-        
+
         <!-- 移动端测试按钮 (底部浮动) -->
         <div v-if="!multiKeyMode" class="fixed bottom-6 right-6 z-50 md:hidden">
-           <button 
-              class="flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-xl hover:bg-blue-700 active:scale-95 transition-all"
-              @click="openTestModal"
-           >
-              <i class="fas fa-vial text-xl"></i>
-           </button>
+          <button
+            class="flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-xl transition-all hover:bg-blue-700 active:scale-95"
+            @click="openTestModal"
+          >
+            <i class="fas fa-vial text-xl"></i>
+          </button>
         </div>
       </div>
     </div>
 
     <!-- 教程内容 -->
     <div v-if="currentTab === 'tutorial'" class="tab-content">
-      <div class="glass-strong rounded-3xl shadow-xl overflow-hidden">
+      <div class="glass-strong overflow-hidden rounded-3xl shadow-xl">
         <TutorialView />
       </div>
     </div>
@@ -314,14 +331,15 @@ watch(apiKey, (newValue) => {
 }
 
 /* 动态背景装饰 */
-.gradient-bg::before, .gradient-bg-dark::before {
+.gradient-bg::before,
+.gradient-bg-dark::before {
   content: '';
   position: fixed;
   top: -50%;
   left: -50%;
   width: 200%;
   height: 200%;
-  background: 
+  background:
     radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
   z-index: 0;
@@ -330,8 +348,12 @@ watch(apiKey, (newValue) => {
 }
 
 @keyframes pulse-bg {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.1); }
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
 }
 
 /* 导航栏玻璃态 */
@@ -362,39 +384,48 @@ watch(apiKey, (newValue) => {
 
 /* 工具栏卡片 */
 .toolbar-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .toolbar-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 :global(.dark) .toolbar-card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.5),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 /* 按钮样式 */
-.user-login-button, .admin-button-refined {
+.user-login-button,
+.admin-button-refined {
   position: relative;
   overflow: hidden;
   z-index: 1;
 }
 
-.user-login-button::after, .admin-button-refined::after {
+.user-login-button::after,
+.admin-button-refined::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transform: translateX(-100%);
   transition: transform 0.5s;
   z-index: -1;
 }
 
-.user-login-button:hover::after, .admin-button-refined:hover::after {
+.user-login-button:hover::after,
+.admin-button-refined:hover::after {
   transform: translateX(100%);
 }
 
@@ -481,13 +512,26 @@ watch(apiKey, (newValue) => {
 }
 
 .animate-shake {
-  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 @keyframes shake {
-  10%, 90% { transform: translate3d(-1px, 0, 0); }
-  20%, 80% { transform: translate3d(2px, 0, 0); }
-  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-  40%, 60% { transform: translate3d(4px, 0, 0); }
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 </style>

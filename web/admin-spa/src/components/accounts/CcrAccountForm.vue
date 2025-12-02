@@ -31,7 +31,7 @@
             >
             <input
               v-model="form.name"
-              class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+              class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
               :class="{ 'border-red-500': errors.name }"
               placeholder="为账户设置一个易识别的名称"
               required
@@ -46,7 +46,7 @@
             >
             <textarea
               v-model="form.description"
-              class="form-input text-gray-900 w-full resize-none border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+              class="form-input w-full resize-none border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
               placeholder="账户用途说明..."
               rows="3"
             />
@@ -59,7 +59,7 @@
               >
               <input
                 v-model="form.apiUrl"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 :class="{ 'border-red-500': errors.apiUrl }"
                 placeholder="例如：https://api.example.com/v1/messages"
                 required
@@ -73,7 +73,7 @@
               >
               <input
                 v-model="form.apiKey"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 :class="{ 'border-red-500': errors.apiKey }"
                 :placeholder="isEdit ? '留空表示不更新' : '必填'"
                 :required="!isEdit"
@@ -90,7 +90,7 @@
               >
               <input
                 v-model.number="form.priority"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 max="100"
                 min="1"
                 placeholder="默认50，数字越小优先级越高"
@@ -106,7 +106,7 @@
               >
               <input
                 v-model="form.userAgent"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 placeholder="留空则透传客户端 User-Agent"
                 type="text"
               />
@@ -136,7 +136,7 @@
               >
               <input
                 v-model.number="form.rateLimitDuration"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 min="1"
                 placeholder="默认60分钟"
                 type="number"
@@ -155,7 +155,7 @@
               >
               <input
                 v-model.number="form.dailyQuota"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 min="0"
                 placeholder="0 表示不限制"
                 step="0.01"
@@ -171,7 +171,7 @@
               >
               <input
                 v-model="form.quotaResetTime"
-                class="form-input text-gray-900 w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                class="form-input w-full border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
                 placeholder="00:00"
                 type="time"
               />
@@ -198,14 +198,14 @@
               >
                 <input
                   v-model="mapping.from"
-                  class="form-input text-gray-900 flex-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input flex-1 border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="原始模型名称"
                   type="text"
                 />
                 <i class="fas fa-arrow-right text-gray-400 dark:text-gray-500" />
                 <input
                   v-model="mapping.to"
-                  class="form-input text-gray-900 flex-1 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
+                  class="form-input flex-1 border-gray-300 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400"
                   placeholder="映射后的模型名称"
                   type="text"
                 />

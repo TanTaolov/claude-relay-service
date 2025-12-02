@@ -1,7 +1,7 @@
 <template>
   <div class="flex min-h-screen items-center justify-center p-4 sm:p-6">
     <div
-      class="glass-strong w-full max-w-md rounded-xl p-6 shadow-2xl sm:rounded-2xl sm:p-8 md:rounded-3xl md:p-10"
+      class="modern-card w-full max-w-md p-6 shadow-2xl sm:p-8 md:p-10"
     >
       <div class="mb-6 text-center sm:mb-8">
         <!-- 使用自定义布局来保持登录页面的居中大logo样式 -->

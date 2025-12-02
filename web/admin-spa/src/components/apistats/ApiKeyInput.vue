@@ -1,5 +1,5 @@
 <template>
-  <div class="api-input-wide-card mb-8 rounded-3xl p-6 shadow-xl">
+  <div class="modern-card mb-8 p-6">
     <!-- 标题区域 -->
     <div class="wide-card-title mb-6">
       <h2 class="mb-2 text-2xl font-bold text-gray-900 dark:text-gray-200">
@@ -158,40 +158,7 @@ const hasValidInput = computed(() => {
 </script>
 
 <style scoped>
-/* 宽卡片样式 - 使用CSS变量 */
-.api-input-wide-card {
-  background: var(--surface-color);
-  backdrop-filter: blur(25px);
-  border: 1px solid var(--border-color);
-  box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 暗夜模式宽卡片样式 */
-:global(.dark) .api-input-wide-card {
-  box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(75, 85, 99, 0.2),
-    inset 0 1px 0 rgba(107, 114, 128, 0.15);
-}
-
-.api-input-wide-card:hover {
-  box-shadow:
-    0 32px 64px -12px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
-}
-
-:global(.dark) .api-input-wide-card:hover {
-  box-shadow:
-    0 32px 64px -12px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(75, 85, 99, 0.25),
-    inset 0 1px 0 rgba(107, 114, 128, 0.3) !important;
-}
+/* 宽卡片样式 - Replaced by modern-card */
 
 /* 标题样式 */
 .wide-card-title h2 {

@@ -1,8 +1,12 @@
 <template>
-  <div class="glass-strong rounded-3xl p-6">
+  <div class="modern-card p-6">
     <div class="mb-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-      <h2 class="flex items-center text-xl font-bold text-gray-800">
-        <i class="fas fa-robot mr-2 text-purple-500" />
+      <h2 class="header-title flex items-center text-xl font-bold">
+        <div
+          class="mr-3 flex h-10 w-10 items-center justify-center rounded-xl bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400"
+        >
+          <i class="fas fa-robot" />
+        </div>
         模型使用分布
       </h2>
 

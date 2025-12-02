@@ -29,7 +29,7 @@
 
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-      <div class="overflow-hidden rounded-lg bg-white shadow dark:bg-gray-800">
+      <div class="modern-card overflow-hidden">
         <div class="p-5">
           <div class="flex items-center">
             <div class="flex-shrink-0">
@@ -61,7 +61,7 @@
         </div>
       </div>
 
-      <div class="overflow-hidden rounded-lg bg-white shadow dark:bg-gray-800">
+      <div class="modern-card overflow-hidden">
         <div class="p-5">
           <div class="flex items-center">
             <div class="flex-shrink-0">
@@ -93,7 +93,7 @@
         </div>
       </div>
 
-      <div class="overflow-hidden rounded-lg bg-white shadow dark:bg-gray-800">
+      <div class="modern-card overflow-hidden">
         <div class="p-5">
           <div class="flex items-center">
             <div class="flex-shrink-0">
@@ -125,7 +125,7 @@
         </div>
       </div>
 
-      <div class="overflow-hidden rounded-lg bg-white shadow dark:bg-gray-800">
+      <div class="modern-card overflow-hidden">
         <div class="p-5">
           <div class="flex items-center">
             <div class="flex-shrink-0">
@@ -159,7 +159,7 @@
     </div>
 
     <!-- Search and Filters -->
-    <div class="rounded-lg bg-white shadow dark:bg-gray-800">
+    <div class="modern-card">
       <div class="px-4 py-5 sm:p-6">
         <div class="sm:flex sm:items-center sm:justify-between">
           <div class="space-y-4 sm:flex sm:items-center sm:space-x-4 sm:space-y-0">
@@ -222,7 +222,7 @@
     </div>
 
     <!-- Users Table -->
-    <div class="overflow-hidden bg-white shadow dark:bg-gray-800 sm:rounded-md">
+    <div class="modern-card overflow-hidden">
       <div class="border-b border-gray-200 px-4 py-5 dark:border-gray-700 sm:px-6">
         <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">
           Users

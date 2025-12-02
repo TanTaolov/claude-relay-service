@@ -28,7 +28,7 @@
         </p>
       </div>
 
-      <div class="rounded-lg bg-white px-6 py-8 shadow dark:bg-gray-800 dark:shadow-xl">
+      <div class="modern-card px-6 py-8 shadow-2xl">
         <form class="space-y-6" @submit.prevent="handleLogin">
           <div>
             <label

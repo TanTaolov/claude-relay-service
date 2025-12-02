@@ -1,5 +1,5 @@
 <template>
-  <div class="card-section p-4 md:p-6">
+  <div class="modern-card p-4 md:p-6">
     <div class="mb-6 flex items-center justify-between">
       <h3
         class="flex flex-col text-lg font-bold text-slate-800 dark:text-slate-100 sm:flex-row sm:items-center md:text-xl"
@@ -173,9 +173,7 @@ const formatNumber = (num) => {
 </script>
 
 <style scoped>
-.card-section {
-  @apply rounded-3xl border border-white/20 bg-white/80 shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-slate-900/80;
-}
+/* card-section removed */
 
 .model-card {
   @apply rounded-2xl border border-slate-200/60 bg-white/60 p-5 transition-all duration-300 dark:border-slate-700/60 dark:bg-slate-800/40;

@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-full flex-col gap-4 md:gap-6">
     <!-- 限制配置 / 聚合模式提示 -->
-    <div class="card-section flex h-full flex-col p-4 md:p-6">
+    <div class="modern-card flex h-full flex-col p-4 md:p-6">
       <h3
         class="mb-6 flex items-center text-lg font-bold text-slate-800 dark:text-slate-100 md:text-xl"
       >
@@ -341,7 +341,7 @@
     </div>
 
     <!-- 详细限制信息 -->
-    <div v-if="hasModelRestrictions" class="card-section p-4 md:p-6">
+    <div v-if="hasModelRestrictions" class="modern-card p-4 md:p-6">
       <h3
         class="mb-4 flex items-center text-lg font-bold text-slate-900 dark:text-slate-100 md:text-xl"
       >
@@ -478,14 +478,6 @@ const formatNumber = (num) => {
 </script>
 
 <style scoped>
-.card-section {
-  @apply rounded-3xl border border-white/20 bg-white/80 shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-slate-900/80;
-}
-
-.card-section:hover {
-  @apply -translate-y-0.5 transform shadow-xl;
-}
-
 .progress-container {
   @apply mt-2 h-2.5 w-full overflow-hidden rounded-full border border-slate-200 bg-slate-100 dark:border-slate-700/50 dark:bg-slate-700/50;
 }

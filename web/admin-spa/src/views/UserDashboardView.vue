@@ -102,7 +102,7 @@
 
         <!-- Stats Cards -->
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-5">
-          <div class="overflow-hidden rounded-lg bg-white shadow dark:bg-gray-800">
+          <div class="modern-card overflow-hidden">
             <div class="p-5">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
@@ -134,7 +134,7 @@
             </div>
           </div>
 
-          <div class="overflow-hidden rounded-lg bg-white shadow dark:bg-gray-800">
+          <div class="modern-card overflow-hidden">
             <div class="p-5">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
@@ -166,7 +166,7 @@
             </div>
           </div>
 
-          <div class="overflow-hidden rounded-lg bg-white shadow dark:bg-gray-800">
+          <div class="modern-card overflow-hidden">
             <div class="p-5">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
@@ -198,7 +198,7 @@
             </div>
           </div>
 
-          <div class="overflow-hidden rounded-lg bg-white shadow dark:bg-gray-800">
+          <div class="modern-card overflow-hidden">
             <div class="p-5">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
@@ -230,7 +230,7 @@
             </div>
           </div>
 
-          <div class="overflow-hidden rounded-lg bg-white shadow dark:bg-gray-800">
+          <div class="modern-card overflow-hidden">
             <div class="p-5">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
@@ -264,7 +264,7 @@
         </div>
 
         <!-- User Info -->
-        <div class="rounded-lg bg-white shadow dark:bg-gray-800">
+        <div class="modern-card">
           <div class="px-4 py-5 sm:p-6">
             <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">
               Account Information

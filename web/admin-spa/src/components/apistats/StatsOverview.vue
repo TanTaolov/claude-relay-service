@@ -4,7 +4,7 @@
       class="grid grid-cols-1 items-start gap-4 md:gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]"
     >
       <!-- 基础信息 / 批量概要 -->
-      <div class="card-section h-full">
+      <div class="modern-card flex h-full flex-col p-6">
         <header class="section-header">
           <div
             class="header-icon-wrapper"
@@ -220,7 +220,7 @@
       </div>
 
       <!-- 使用统计概览 -->
-      <div class="card-section h-full">
+      <div class="modern-card flex h-full flex-col p-6">
         <header class="section-header">
           <div class="header-icon-wrapper bg-green-100 dark:bg-green-900/30">
             <i class="header-icon fas fa-chart-bar text-green-600 dark:text-green-400" />
@@ -291,7 +291,7 @@
     </div>
 
     <!-- 专属账号运行状态，仅在单 key 且存在绑定时显示 -->
-    <div v-if="!multiKeyMode && boundAccountList.length > 0" class="card-section">
+    <div v-if="!multiKeyMode && boundAccountList.length > 0" class="modern-card flex flex-col p-6">
       <header class="section-header">
         <div class="header-icon-wrapper bg-indigo-100 dark:bg-indigo-900/30">
           <i class="header-icon fas fa-plug text-indigo-600 dark:text-indigo-400" />
@@ -655,9 +655,7 @@ const getCodexWindowLabel = (type) => (type === 'secondary' ? '周限' : '5h')
 </script>
 
 <style scoped>
-.card-section {
-  @apply flex h-full flex-col rounded-3xl border border-white/20 bg-white/80 p-6 shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-slate-900/80;
-}
+/* Removed card-section style as it is replaced by global modern-card */
 
 .card-section:hover {
   @apply -translate-y-0.5 transform shadow-xl;

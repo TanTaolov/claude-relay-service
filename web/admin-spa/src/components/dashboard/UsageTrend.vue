@@ -1,8 +1,12 @@
 <template>
-  <div class="glass-strong mb-8 rounded-3xl p-6">
+  <div class="modern-card mb-8 p-6">
     <div class="mb-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-      <h2 class="flex items-center text-xl font-bold text-gray-800">
-        <i class="fas fa-chart-area mr-2 text-blue-500" />
+      <h2 class="header-title flex items-center text-xl font-bold">
+        <div
+          class="mr-3 flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
+        >
+          <i class="fas fa-chart-area" />
+        </div>
         使用趋势
       </h2>
 

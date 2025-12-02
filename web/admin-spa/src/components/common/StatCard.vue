@@ -5,7 +5,9 @@
         <p class="mb-1 text-xs font-medium text-gray-600 dark:text-gray-400 sm:text-sm">
           {{ title }}
         </p>
-        <p class="text-2xl font-bold font-mono tracking-tight text-gray-800 dark:text-gray-100 sm:text-3xl">
+        <p
+          class="font-mono text-2xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-3xl"
+        >
           {{ value }}
         </p>
         <p

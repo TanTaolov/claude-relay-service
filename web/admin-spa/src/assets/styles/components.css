@@ -87,6 +87,11 @@
   transition: all 0.3s ease;
 }
 
+.dark .stat-card {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(30, 41, 59, 0.8) 100%);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+}
+
 .stat-card::before {
   content: '';
   position: absolute;
@@ -104,6 +109,12 @@
   box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .stat-card:hover {
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.5),
+    0 10px 10px -5px rgba(0, 0, 0, 0.3);
 }
 
 .stat-card:hover::before {

@@ -10,7 +10,9 @@
             <p class="mb-1 text-xs font-semibold text-gray-600 dark:text-gray-400 sm:text-sm">
               总API Keys
             </p>
-            <p class="text-2xl font-bold font-mono tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+            <p
+              class="font-mono text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl"
+            >
               {{ dashboardData.totalApiKeys }}
             </p>
             <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
@@ -30,7 +32,9 @@
               服务账户
             </p>
             <div class="flex flex-wrap items-baseline gap-x-2">
-              <p class="text-2xl font-bold font-mono tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+              <p
+                class="font-mono text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl"
+              >
                 {{ dashboardData.totalAccounts }}
               </p>
               <!-- 各平台账户数量展示 -->
@@ -163,7 +167,9 @@
             <p class="mb-1 text-xs font-semibold text-gray-600 dark:text-gray-400 sm:text-sm">
               今日请求
             </p>
-            <p class="text-2xl font-bold font-mono tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+            <p
+              class="font-mono text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl"
+            >
               {{ dashboardData.todayRequests }}
             </p>
             <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
@@ -182,7 +188,7 @@
             <p class="mb-1 text-xs font-semibold text-gray-600 dark:text-gray-400 sm:text-sm">
               系统状态
             </p>
-            <p class="text-2xl font-bold font-mono tracking-tight text-green-600 sm:text-3xl">
+            <p class="font-mono text-2xl font-bold tracking-tight text-green-600 sm:text-3xl">
               {{ dashboardData.systemStatus }}
             </p>
             <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
@@ -207,7 +213,9 @@
               今日Token
             </p>
             <div class="mb-2 flex flex-wrap items-baseline gap-2">
-              <p class="text-xl font-bold font-mono tracking-tight text-blue-600 sm:text-2xl md:text-3xl">
+              <p
+                class="font-mono text-xl font-bold tracking-tight text-blue-600 sm:text-2xl md:text-3xl"
+              >
                 {{
                   formatNumber(
                     (dashboardData.todayInputTokens || 0) +
@@ -263,7 +271,9 @@
               总Token消耗
             </p>
             <div class="mb-2 flex flex-wrap items-baseline gap-2">
-              <p class="text-xl font-bold font-mono tracking-tight text-emerald-600 sm:text-2xl md:text-3xl">
+              <p
+                class="font-mono text-xl font-bold tracking-tight text-emerald-600 sm:text-2xl md:text-3xl"
+              >
                 {{
                   formatNumber(
                     (dashboardData.totalInputTokens || 0) +
@@ -319,7 +329,7 @@
               实时RPM
               <span class="text-xs text-gray-400">({{ dashboardData.metricsWindow }}分钟)</span>
             </p>
-            <p class="text-2xl font-bold font-mono tracking-tight text-orange-600 sm:text-3xl">
+            <p class="font-mono text-2xl font-bold tracking-tight text-orange-600 sm:text-3xl">
               {{ dashboardData.realtimeRPM || 0 }}
             </p>
             <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
@@ -342,7 +352,7 @@
               实时TPM
               <span class="text-xs text-gray-400">({{ dashboardData.metricsWindow }}分钟)</span>
             </p>
-            <p class="text-2xl font-bold font-mono tracking-tight text-rose-600 sm:text-3xl">
+            <p class="font-mono text-2xl font-bold tracking-tight text-rose-600 sm:text-3xl">
               {{ formatNumber(dashboardData.realtimeTPM || 0) }}
             </p>
             <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">

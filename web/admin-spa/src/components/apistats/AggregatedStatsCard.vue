@@ -1,10 +1,12 @@
 <template>
-  <div class="card-section h-full p-4 md:p-6 flex flex-col">
+  <div class="card-section flex h-full flex-col p-4 md:p-6">
     <h3
       class="mb-6 flex items-center text-lg font-bold text-slate-800 dark:text-slate-100 md:text-xl"
     >
       <div class="flex items-center gap-3">
-        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400">
+        <div
+          class="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400"
+        >
           <i class="fas fa-chart-pie text-lg" />
         </div>
         <div class="flex flex-col">
@@ -16,12 +18,17 @@
       </div>
     </h3>
 
-    <div v-if="aggregatedStats && individualStats.length > 0" class="space-y-4 flex-1">
+    <div v-if="aggregatedStats && individualStats.length > 0" class="flex-1 space-y-4">
       <!-- 各Key使用占比列表 -->
       <div v-for="(stat, index) in topKeys" :key="stat.apiId" class="usage-item group">
         <div class="mb-2 flex items-center justify-between text-sm">
-          <span class="truncate font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
-            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white font-mono" :class="getProgressColorBg(index)">
+          <span
+            class="flex items-center gap-2 truncate font-bold text-slate-700 dark:text-slate-200"
+          >
+            <span
+              class="flex h-5 w-5 items-center justify-center rounded-full font-mono text-xs text-white"
+              :class="getProgressColorBg(index)"
+            >
               {{ index + 1 }}
             </span>
             {{ stat.name || `Key ${index + 1}` }}
@@ -40,16 +47,27 @@
         <div
           class="mt-1.5 flex items-center justify-between font-mono text-[10px] text-slate-400 dark:text-slate-500"
         >
-          <span><i class="fas fa-exchange-alt mr-1"></i>{{ formatNumber(getStatUsage(stat)?.requests || 0) }}</span>
-          <span><i class="fas fa-dollar-sign mr-1"></i>{{ getStatUsage(stat)?.formattedCost || '$0.00' }}</span>
+          <span
+            ><i class="fas fa-exchange-alt mr-1"></i
+            >{{ formatNumber(getStatUsage(stat)?.requests || 0) }}</span
+          >
+          <span
+            ><i class="fas fa-dollar-sign mr-1"></i
+            >{{ getStatUsage(stat)?.formattedCost || '$0.00' }}</span
+          >
         </div>
       </div>
 
       <!-- 其他Keys汇总 -->
-      <div v-if="otherKeysCount > 0" class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700/50">
+      <div
+        v-if="otherKeysCount > 0"
+        class="mt-4 border-t border-slate-100 pt-4 dark:border-slate-700/50"
+      >
         <div class="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
           <span class="flex items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-[10px]">
+            <span
+              class="flex h-5 w-5 items-center justify-center rounded-full bg-slate-200 text-[10px] dark:bg-slate-700"
+            >
               <i class="fas fa-ellipsis-h"></i>
             </span>
             其他 {{ otherKeysCount }} 个Keys
@@ -62,9 +80,11 @@
     <!-- 单个Key模式提示 -->
     <div
       v-else-if="!multiKeyMode"
-      class="flex flex-1 flex-col items-center justify-center text-sm text-slate-400 dark:text-slate-500 py-8"
+      class="flex flex-1 flex-col items-center justify-center py-8 text-sm text-slate-400 dark:text-slate-500"
     >
-      <div class="w-16 h-16 rounded-full bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center mb-3">
+      <div
+        class="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-slate-50 dark:bg-slate-800/50"
+      >
         <i class="fas fa-chart-pie text-2xl" />
       </div>
       <p>使用占比仅在多Key查询时显示</p>
@@ -72,9 +92,11 @@
 
     <div
       v-else
-      class="flex flex-1 flex-col items-center justify-center text-sm text-slate-400 dark:text-slate-500 py-8"
+      class="flex flex-1 flex-col items-center justify-center py-8 text-sm text-slate-400 dark:text-slate-500"
     >
-      <div class="w-16 h-16 rounded-full bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center mb-3">
+      <div
+        class="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-slate-50 dark:bg-slate-800/50"
+      >
         <i class="fas fa-inbox text-2xl" />
       </div>
       暂无数据
@@ -188,7 +210,7 @@ const formatNumber = (num) => {
 }
 
 .card-section:hover {
-  @apply shadow-xl transform -translate-y-0.5;
+  @apply -translate-y-0.5 transform shadow-xl;
 }
 
 .usage-item {
@@ -196,7 +218,7 @@ const formatNumber = (num) => {
 }
 
 .progress-track {
-  @apply h-2 w-full rounded-full bg-slate-100 dark:bg-slate-700/50 overflow-hidden;
+  @apply h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-700/50;
 }
 
 .progress-bar {

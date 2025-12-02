@@ -2,11 +2,6 @@
   <div
     class="relative flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 dark:bg-gray-900 sm:px-6 lg:px-8"
   >
-    <!-- 主题切换按钮 -->
-    <div class="fixed right-4 top-4 z-10">
-      <ThemeToggle mode="dropdown" />
-    </div>
-
     <div class="w-full max-w-md space-y-8">
       <div>
         <div class="mx-auto flex h-12 w-auto items-center justify-center">
@@ -151,7 +146,6 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { useThemeStore } from '@/stores/theme'
 import { showToast } from '@/utils/toast'
-import ThemeToggle from '@/components/common/ThemeToggle.vue'
 
 const router = useRouter()
 const userStore = useUserStore()

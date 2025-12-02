@@ -1,10 +1,5 @@
 <template>
   <div class="flex min-h-screen items-center justify-center p-4 sm:p-6">
-    <!-- 主题切换按钮 - 固定在右上角 -->
-    <div class="fixed right-4 top-4 z-50">
-      <ThemeToggle mode="dropdown" />
-    </div>
-
     <div
       class="glass-strong w-full max-w-md rounded-xl p-6 shadow-2xl sm:rounded-2xl sm:p-8 md:rounded-3xl md:p-10"
     >
@@ -99,7 +94,6 @@
 import { ref, onMounted, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useThemeStore } from '@/stores/theme'
-import ThemeToggle from '@/components/common/ThemeToggle.vue'
 
 const authStore = useAuthStore()
 const themeStore = useThemeStore()

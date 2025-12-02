@@ -10,17 +10,6 @@
           :title="oemSettings.siteName"
         />
         <div class="flex items-center gap-2 md:gap-4">
-          <!-- 主题切换按钮 -->
-          <div class="flex items-center">
-            <ThemeToggle mode="dropdown" />
-          </div>
-
-          <!-- 分隔线 -->
-          <div
-            v-if="oemSettings.ldapEnabled || oemSettings.showAdminButton !== false"
-            class="h-8 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent opacity-50 dark:via-gray-600"
-          />
-
           <!-- 用户登录按钮 (仅在 LDAP 启用时显示) -->
           <router-link
             v-if="oemSettings.ldapEnabled"
@@ -207,7 +196,6 @@ import { storeToRefs } from 'pinia'
 import { useApiStatsStore } from '@/stores/apistats'
 import { useThemeStore } from '@/stores/theme'
 import LogoTitle from '@/components/common/LogoTitle.vue'
-import ThemeToggle from '@/components/common/ThemeToggle.vue'
 import ApiKeyInput from '@/components/apistats/ApiKeyInput.vue'
 import StatsOverview from '@/components/apistats/StatsOverview.vue'
 import TokenDistribution from '@/components/apistats/TokenDistribution.vue'

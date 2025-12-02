@@ -1,48 +1,60 @@
 <template>
-  <div class="card h-full p-4 md:p-6">
+  <div class="card-section h-full p-4 md:p-6 flex flex-col">
     <h3
-      class="mb-3 flex flex-col text-lg font-bold text-gray-900 dark:text-gray-100 sm:flex-row sm:items-center md:mb-4 md:text-xl"
+      class="mb-6 flex items-center text-lg font-bold text-slate-800 dark:text-slate-100 md:text-xl"
     >
-      <span class="flex items-center">
-        <i class="fas fa-chart-pie mr-2 text-sm text-orange-500 md:mr-3 md:text-base" />
-        使用占比
-      </span>
-      <span class="text-xs font-normal text-gray-600 dark:text-gray-400 sm:ml-2 md:text-sm"
-        >({{ statsPeriod === 'daily' ? '今日' : '本月' }})</span
-      >
+      <div class="flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400">
+          <i class="fas fa-chart-pie text-lg" />
+        </div>
+        <div class="flex flex-col">
+          <span>使用占比</span>
+          <span class="text-xs font-normal text-slate-500 dark:text-slate-400">
+            {{ statsPeriod === 'daily' ? '今日实时数据' : '本月累计数据' }}
+          </span>
+        </div>
+      </div>
     </h3>
 
-    <div v-if="aggregatedStats && individualStats.length > 0" class="space-y-2 md:space-y-3">
+    <div v-if="aggregatedStats && individualStats.length > 0" class="space-y-4 flex-1">
       <!-- 各Key使用占比列表 -->
-      <div v-for="(stat, index) in topKeys" :key="stat.apiId" class="relative">
-        <div class="mb-1 flex items-center justify-between text-sm">
-          <span class="truncate font-medium text-gray-700 dark:text-gray-300">
+      <div v-for="(stat, index) in topKeys" :key="stat.apiId" class="usage-item group">
+        <div class="mb-2 flex items-center justify-between text-sm">
+          <span class="truncate font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white font-mono" :class="getProgressColorBg(index)">
+              {{ index + 1 }}
+            </span>
             {{ stat.name || `Key ${index + 1}` }}
           </span>
-          <span class="font-mono text-xs text-gray-600 dark:text-gray-400">
+          <span class="font-mono text-xs font-bold text-slate-600 dark:text-slate-300">
             {{ calculatePercentage(stat) }}%
           </span>
         </div>
-        <div class="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+        <div class="progress-track">
           <div
-            class="h-2 rounded-full transition-all duration-300"
+            class="progress-bar"
             :class="getProgressColor(index)"
             :style="{ width: calculatePercentage(stat) + '%' }"
           />
         </div>
         <div
-          class="mt-1 flex items-center justify-between font-mono text-xs text-gray-500 dark:text-gray-400"
+          class="mt-1.5 flex items-center justify-between font-mono text-[10px] text-slate-400 dark:text-slate-500"
         >
-          <span>{{ formatNumber(getStatUsage(stat)?.requests || 0) }}次</span>
-          <span>{{ getStatUsage(stat)?.formattedCost || '$0.00' }}</span>
+          <span><i class="fas fa-exchange-alt mr-1"></i>{{ formatNumber(getStatUsage(stat)?.requests || 0) }}</span>
+          <span><i class="fas fa-dollar-sign mr-1"></i>{{ getStatUsage(stat)?.formattedCost || '$0.00' }}</span>
         </div>
       </div>
 
       <!-- 其他Keys汇总 -->
-      <div v-if="otherKeysCount > 0" class="border-t border-gray-200 pt-2 dark:border-gray-700">
-        <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
-          <span>其他 {{ otherKeysCount }} 个Keys</span>
-          <span>{{ otherPercentage }}%</span>
+      <div v-if="otherKeysCount > 0" class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700/50">
+        <div class="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+          <span class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-[10px]">
+              <i class="fas fa-ellipsis-h"></i>
+            </span>
+            其他 {{ otherKeysCount }} 个Keys
+          </span>
+          <span class="font-mono font-bold">{{ otherPercentage }}%</span>
         </div>
       </div>
     </div>
@@ -50,19 +62,21 @@
     <!-- 单个Key模式提示 -->
     <div
       v-else-if="!multiKeyMode"
-      class="flex h-32 items-center justify-center text-sm text-gray-500 dark:text-gray-400"
+      class="flex flex-1 flex-col items-center justify-center text-sm text-slate-400 dark:text-slate-500 py-8"
     >
-      <div class="text-center">
-        <i class="fas fa-chart-pie mb-2 text-2xl" />
-        <p>使用占比仅在多Key查询时显示</p>
+      <div class="w-16 h-16 rounded-full bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center mb-3">
+        <i class="fas fa-chart-pie text-2xl" />
       </div>
+      <p>使用占比仅在多Key查询时显示</p>
     </div>
 
     <div
       v-else
-      class="flex h-32 items-center justify-center text-sm text-gray-500 dark:text-gray-400"
+      class="flex flex-1 flex-col items-center justify-center text-sm text-slate-400 dark:text-slate-500 py-8"
     >
-      <i class="fas fa-chart-pie mr-2" />
+      <div class="w-16 h-16 rounded-full bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center mb-3">
+        <i class="fas fa-inbox text-2xl" />
+      </div>
       暂无数据
     </div>
   </div>
@@ -141,8 +155,13 @@ const calculatePercentage = (stat) => {
 
 // 获取进度条颜色
 const getProgressColor = (index) => {
-  const colors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-yellow-500', 'bg-pink-500']
-  return colors[index] || 'bg-gray-400'
+  const colors = ['bg-blue-500', 'bg-emerald-500', 'bg-purple-500', 'bg-amber-500', 'bg-rose-500']
+  return colors[index] || 'bg-slate-400'
+}
+
+const getProgressColorBg = (index) => {
+  const colors = ['bg-blue-500', 'bg-emerald-500', 'bg-purple-500', 'bg-amber-500', 'bg-rose-500']
+  return colors[index] || 'bg-slate-400'
 }
 
 // 格式化数字
@@ -164,39 +183,23 @@ const formatNumber = (num) => {
 </script>
 
 <style scoped>
-/* 卡片样式 - 使用CSS变量 */
-.card {
-  background: var(--surface-color);
-  border-radius: 16px;
-  border: 1px solid var(--border-color);
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.card-section {
+  @apply rounded-3xl border border-white/20 bg-white/80 shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-slate-900/80;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+.card-section:hover {
+  @apply shadow-xl transform -translate-y-0.5;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.15),
-    0 10px 10px -5px rgba(0, 0, 0, 0.08);
+.usage-item {
+  @apply transition-colors duration-200;
 }
 
-:global(.dark) .card:hover {
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.5),
-    0 10px 10px -5px rgba(0, 0, 0, 0.35);
+.progress-track {
+  @apply h-2 w-full rounded-full bg-slate-100 dark:bg-slate-700/50 overflow-hidden;
+}
+
+.progress-bar {
+  @apply h-full rounded-full transition-all duration-500 ease-out;
 }
 </style>

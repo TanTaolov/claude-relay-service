@@ -1,80 +1,86 @@
 <template>
   <div class="flex h-full flex-col gap-4 md:gap-6">
     <!-- 限制配置 / 聚合模式提示 -->
-    <div class="card flex h-full flex-col p-4 md:p-6">
+    <div class="card-section flex h-full flex-col p-4 md:p-6">
       <h3
-        class="mb-3 flex items-center text-lg font-bold text-gray-900 dark:text-gray-100 md:mb-4 md:text-xl"
+        class="mb-6 flex items-center text-lg font-bold text-slate-800 dark:text-slate-100 md:text-xl"
       >
-        <i class="fas fa-shield-alt mr-2 text-sm text-red-500 md:mr-3 md:text-base" />
-        {{ multiKeyMode ? '限制配置（聚合查询模式）' : '限制配置' }}
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-100 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400">
+            <i class="fas fa-shield-alt text-lg" />
+          </div>
+          <span>{{ multiKeyMode ? '限制配置（聚合查询模式）' : '限制配置' }}</span>
+        </div>
       </h3>
 
       <!-- 多 Key 模式下的聚合统计信息 -->
       <div v-if="multiKeyMode && aggregatedStats" class="space-y-4">
         <!-- API Keys 概况 -->
         <div
-          class="rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 p-4 dark:from-blue-900/20 dark:to-indigo-900/20"
+          class="rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 p-5 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-100 dark:border-blue-800/30"
         >
-          <div class="mb-3 flex items-center justify-between">
-            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
-              <i class="fas fa-layer-group mr-2 text-blue-500" />
+          <div class="mb-4 flex items-center justify-between">
+            <span class="text-sm font-bold text-slate-700 dark:text-slate-200 flex items-center gap-2">
+              <i class="fas fa-layer-group text-blue-500" />
               API Keys 概况
             </span>
             <span
-              class="rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-800 dark:text-blue-200"
+              class="rounded-lg bg-white/80 px-2.5 py-1 text-xs font-bold text-blue-600 shadow-sm dark:bg-slate-800/80 dark:text-blue-300"
             >
               {{ aggregatedStats.activeKeys }}/{{ aggregatedStats.totalKeys }}
             </span>
           </div>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="text-center">
-              <div class="text-lg font-bold text-gray-900 dark:text-gray-100">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="text-center p-2 bg-white/50 rounded-xl dark:bg-slate-800/30">
+              <div class="text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">
                 {{ aggregatedStats.totalKeys }}
               </div>
-              <div class="text-xs text-gray-600 dark:text-gray-400">总计 Keys</div>
+              <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">总计 Keys</div>
             </div>
-            <div class="text-center">
-              <div class="text-lg font-bold text-green-600">
+            <div class="text-center p-2 bg-white/50 rounded-xl dark:bg-slate-800/30">
+              <div class="text-2xl font-bold text-emerald-600 dark:text-emerald-400 tracking-tight">
                 {{ aggregatedStats.activeKeys }}
               </div>
-              <div class="text-xs text-gray-600 dark:text-gray-400">激活 Keys</div>
+              <div class="text-[10px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">激活 Keys</div>
             </div>
           </div>
         </div>
 
         <!-- 聚合统计数据 -->
         <div
-          class="rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 p-4 dark:from-purple-900/20 dark:to-pink-900/20"
+          class="rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 p-5 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-100 dark:border-purple-800/30"
         >
-          <div class="mb-3 flex items-center">
-            <i class="fas fa-chart-pie mr-2 text-purple-500" />
-            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">聚合统计摘要</span>
+          <div class="mb-4 flex items-center">
+            <div class="h-8 w-8 rounded-lg bg-white/80 flex items-center justify-center text-purple-500 shadow-sm mr-3 dark:bg-slate-800/80">
+              <i class="fas fa-chart-pie" />
+            </div>
+            <span class="text-sm font-bold text-slate-700 dark:text-slate-200">聚合统计摘要</span>
           </div>
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs text-gray-600 dark:text-gray-400">
-                <i class="fas fa-database mr-1 text-gray-400" />
+          <div class="space-y-3">
+            <div class="flex items-center justify-between p-2 bg-white/40 rounded-lg dark:bg-slate-800/20">
+              <span class="text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                <i class="fas fa-database text-slate-400" />
                 总请求数
               </span>
-              <span class="text-sm font-medium text-gray-900 dark:text-gray-100">
+              <span class="text-sm font-bold font-mono text-slate-800 dark:text-slate-100">
                 {{ formatNumber(aggregatedStats.usage.requests) }}
               </span>
             </div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs text-gray-600 dark:text-gray-400">
-                <i class="fas fa-coins mr-1 text-yellow-500" />
+            <div class="flex items-center justify-between p-2 bg-white/40 rounded-lg dark:bg-slate-800/20">
+              <span class="text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                <i class="fas fa-coins text-yellow-500" />
                 总 Tokens
               </span>
-              <span class="text-sm font-medium text-gray-900 dark:text-gray-100">
+              <span class="text-sm font-bold font-mono text-slate-800 dark:text-slate-100">
                 {{ formatNumber(aggregatedStats.usage.allTokens) }}
               </span>
             </div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs text-gray-600 dark:text-gray-400">
-                <i class="fas fa-dollar-sign mr-1 text-green-500" />
+            <div class="flex items-center justify-between p-2 bg-white/40 rounded-lg dark:bg-slate-800/20">
+              <span class="text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-2">
+                <i class="fas fa-dollar-sign text-emerald-500" />
                 总费用
               </span>
-              <span class="text-sm font-medium text-gray-900 dark:text-gray-100">
+              <span class="text-sm font-bold font-mono text-slate-800 dark:text-slate-100">
                 {{ aggregatedStats.usage.formattedCost }}
               </span>
             </div>
@@ -84,32 +90,33 @@
         <!-- 无效 Keys 提示 -->
         <div
           v-if="invalidKeys && invalidKeys.length > 0"
-          class="rounded-lg bg-red-50 p-3 text-sm dark:bg-red-900/20"
+          class="rounded-2xl bg-red-50 p-4 text-sm dark:bg-red-900/20 border border-red-100 dark:border-red-800/30"
         >
-          <i class="fas fa-exclamation-triangle mr-2 text-red-600 dark:text-red-400" />
-          <span class="text-red-700 dark:text-red-300">
-            {{ invalidKeys.length }} 个无效的 API Key
-          </span>
+          <div class="flex items-center gap-3 text-red-700 dark:text-red-300 font-medium">
+             <i class="fas fa-exclamation-triangle text-lg" />
+             <span>{{ invalidKeys.length }} 个无效的 API Key</span>
+          </div>
         </div>
 
         <!-- 提示信息 -->
         <div
-          class="rounded-lg bg-gray-50 p-3 text-xs text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+          class="rounded-xl bg-slate-50 p-4 text-xs text-slate-500 dark:bg-slate-800/50 dark:text-slate-400 flex gap-3 items-start leading-relaxed"
         >
-          <i class="fas fa-info-circle mr-1" />
-          每个 API Key 有独立的限制设置，聚合模式下不显示单个限制配置
+          <i class="fas fa-info-circle mt-0.5 flex-shrink-0" />
+          <span>每个 API Key 有独立的限制设置，聚合模式下不显示单个限制配置。统计数据仅包含查询成功的 Key。</span>
         </div>
       </div>
 
       <!-- 仅在单 Key 模式下显示限制配置 -->
-      <div v-if="!multiKeyMode" class="space-y-4 md:space-y-5">
+      <div v-if="!multiKeyMode" class="space-y-6">
         <!-- 每日费用限制 -->
-        <div>
-          <div class="mb-2 flex items-center justify-between">
-            <span class="text-sm font-medium text-gray-600 dark:text-gray-400 md:text-base"
-              >每日费用限制</span
-            >
-            <span class="text-xs text-gray-500 dark:text-gray-400 md:text-sm">
+        <div class="limit-item">
+          <div class="mb-3 flex items-center justify-between">
+            <span class="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+              <i class="fas fa-calendar-day text-blue-500"></i>
+              每日费用限制
+            </span>
+            <span class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md">
               <span v-if="statsData.limits.dailyCostLimit > 0">
                 ${{ statsData.limits.currentDailyCost.toFixed(4) }} / ${{
                   statsData.limits.dailyCostLimit.toFixed(2)
@@ -120,28 +127,31 @@
               </span>
             </span>
           </div>
-          <div
-            v-if="statsData.limits.dailyCostLimit > 0"
-            class="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700"
-          >
+          <div class="progress-container">
             <div
-              class="h-2 rounded-full transition-all duration-300"
-              :class="getDailyCostProgressColor()"
-              :style="{ width: getDailyCostProgress() + '%' }"
-            />
-          </div>
-          <div v-else class="h-2 w-full rounded-full bg-gray-200">
-            <div class="h-2 rounded-full bg-green-500" style="width: 0%" />
+              v-if="statsData.limits.dailyCostLimit > 0"
+              class="progress-track"
+            >
+              <div
+                class="progress-bar shadow-sm"
+                :class="getDailyCostProgressColor()"
+                :style="{ width: getDailyCostProgress() + '%' }"
+              />
+            </div>
+            <div v-else class="progress-track">
+              <div class="progress-bar bg-emerald-500 w-0" />
+            </div>
           </div>
         </div>
 
         <!-- 总费用限制 -->
-        <div>
-          <div class="mb-2 flex items-center justify-between">
-            <span class="text-sm font-medium text-gray-600 dark:text-gray-400 md:text-base"
-              >总费用限制</span
-            >
-            <span class="text-xs text-gray-500 dark:text-gray-400 md:text-sm">
+        <div class="limit-item">
+          <div class="mb-3 flex items-center justify-between">
+            <span class="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+              <i class="fas fa-wallet text-purple-500"></i>
+              总费用限制
+            </span>
+            <span class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md">
               <span v-if="statsData.limits.totalCostLimit > 0">
                 ${{ statsData.limits.currentTotalCost.toFixed(4) }} / ${{
                   statsData.limits.totalCostLimit.toFixed(2)
@@ -152,39 +162,44 @@
               </span>
             </span>
           </div>
-          <div
-            v-if="statsData.limits.totalCostLimit > 0"
-            class="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700"
-          >
+          <div class="progress-container">
             <div
-              class="h-2 rounded-full transition-all duration-300"
-              :class="getTotalCostProgressColor()"
-              :style="{ width: getTotalCostProgress() + '%' }"
-            />
-          </div>
-          <div v-else class="h-2 w-full rounded-full bg-gray-200">
-            <div class="h-2 rounded-full bg-blue-500" style="width: 0%" />
+              v-if="statsData.limits.totalCostLimit > 0"
+              class="progress-track"
+            >
+              <div
+                class="progress-bar shadow-sm"
+                :class="getTotalCostProgressColor()"
+                :style="{ width: getTotalCostProgress() + '%' }"
+              />
+            </div>
+            <div v-else class="progress-track">
+              <div class="progress-bar bg-blue-500 w-0" />
+            </div>
           </div>
         </div>
 
         <!-- Opus 模型周费用限制 -->
-        <div v-if="statsData.limits.weeklyOpusCostLimit > 0">
-          <div class="mb-2 flex items-center justify-between">
-            <span class="text-sm font-medium text-gray-600 dark:text-gray-400 md:text-base"
-              >Opus 模型周费用限制</span
-            >
-            <span class="text-xs text-gray-500 dark:text-gray-400 md:text-sm">
+        <div v-if="statsData.limits.weeklyOpusCostLimit > 0" class="limit-item">
+          <div class="mb-3 flex items-center justify-between">
+            <span class="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+              <i class="fas fa-star text-amber-500"></i>
+              Opus 周费用限制
+            </span>
+            <span class="text-xs font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded-md">
               ${{ statsData.limits.weeklyOpusCost.toFixed(4) }} / ${{
                 statsData.limits.weeklyOpusCostLimit.toFixed(2)
               }}
             </span>
           </div>
-          <div class="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
-            <div
-              class="h-2 rounded-full transition-all duration-300"
-              :class="getOpusWeeklyCostProgressColor()"
-              :style="{ width: getOpusWeeklyCostProgress() + '%' }"
-            />
+          <div class="progress-container">
+             <div class="progress-track">
+              <div
+                class="progress-bar shadow-sm"
+                :class="getOpusWeeklyCostProgressColor()"
+                :style="{ width: getOpusWeeklyCostProgress() + '%' }"
+              />
+            </div>
           </div>
         </div>
 
@@ -196,6 +211,7 @@
               statsData.limits.tokenLimit > 0 ||
               statsData.limits.rateLimitCost > 0)
           "
+          class="limit-item bg-slate-50 dark:bg-slate-800/30 p-4 rounded-2xl border border-slate-100 dark:border-slate-700/50"
         >
           <WindowCountdown
             :cost-limit="statsData.limits.rateLimitCost"
@@ -213,8 +229,8 @@
             :window-start-time="statsData.limits.windowStartTime"
           />
 
-          <div class="mt-2 text-xs text-gray-500 dark:text-gray-400">
-            <i class="fas fa-info-circle mr-1" />
+          <div class="mt-3 flex items-start gap-2 text-xs text-slate-500 dark:text-slate-400">
+            <i class="fas fa-info-circle mt-0.5" />
             <span v-if="statsData.limits.rateLimitCost > 0">
               请求次数和费用限制为"或"的关系，任一达到限制即触发限流
             </span>
@@ -226,53 +242,57 @@
         </div>
 
         <!-- 其他限制信息 -->
-        <div class="space-y-4 border-t border-gray-100 pt-3 dark:border-gray-700">
-          <div class="flex items-center justify-between">
-            <span class="text-sm text-gray-600 dark:text-gray-400 md:text-base">并发限制</span>
-            <span class="text-sm font-medium text-gray-900 md:text-base">
+        <div class="space-y-4 pt-2">
+          <div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800/30 rounded-xl">
+            <span class="text-sm font-medium text-slate-600 dark:text-slate-400">并发限制</span>
+            <span class="text-sm font-bold text-slate-900 dark:text-slate-100">
               <span v-if="statsData.limits.concurrencyLimit > 0">
                 {{ statsData.limits.concurrencyLimit }}
               </span>
               <span v-else class="flex items-center gap-1">
-                <i class="fas fa-infinity text-gray-400" />
+                <i class="fas fa-infinity text-slate-400" />
               </span>
             </span>
           </div>
-          <div class="flex items-center justify-between">
-            <span class="text-sm text-gray-600 dark:text-gray-400 md:text-base">模型限制</span>
-            <span class="text-sm font-medium text-gray-900 md:text-base">
-              <span v-if="hasModelRestrictions" class="text-orange-600">
-                <i class="fas fa-exclamation-triangle mr-1 text-xs md:text-sm" />
-                限制 {{ statsData.restrictions.restrictedModels.length }} 个模型
-              </span>
-              <span v-else class="text-green-600">
-                <i class="fas fa-check-circle mr-1 text-xs md:text-sm" />
-                允许所有模型
-              </span>
-            </span>
-          </div>
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-sm text-gray-600 dark:text-gray-400 md:text-base">客户端限制</span>
-              <span class="text-sm font-medium text-gray-900 md:text-base">
-                <span v-if="hasClientRestrictions" class="text-orange-600">
-                  <i class="fas fa-exclamation-triangle mr-1 text-xs md:text-sm" />
-                  限 {{ statsData.restrictions.allowedClients.length }} 种客户端使用
+          
+          <div class="p-3 bg-slate-50 dark:bg-slate-800/30 rounded-xl space-y-3">
+             <div class="flex items-center justify-between">
+                <span class="text-sm font-medium text-slate-600 dark:text-slate-400">模型限制</span>
+                <span class="text-sm font-bold">
+                  <span v-if="hasModelRestrictions" class="text-amber-600 dark:text-amber-400">
+                    <i class="fas fa-exclamation-triangle mr-1 text-xs" />
+                    限制 {{ statsData.restrictions.restrictedModels.length }} 个模型
+                  </span>
+                  <span v-else class="text-emerald-600 dark:text-emerald-400">
+                    <i class="fas fa-check-circle mr-1 text-xs" />
+                    允许所有
+                  </span>
                 </span>
-                <span v-else class="text-green-600">
-                  <i class="fas fa-check-circle mr-1 text-xs md:text-sm" />
-                  允许所有客户端
+             </div>
+          </div>
+
+          <div class="p-3 bg-slate-50 dark:bg-slate-800/30 rounded-xl space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-sm font-medium text-slate-600 dark:text-slate-400">客户端限制</span>
+              <span class="text-sm font-bold">
+                <span v-if="hasClientRestrictions" class="text-amber-600 dark:text-amber-400">
+                  <i class="fas fa-exclamation-triangle mr-1 text-xs" />
+                  限 {{ statsData.restrictions.allowedClients.length }} 种客户端
+                </span>
+                <span v-else class="text-emerald-600 dark:text-emerald-400">
+                  <i class="fas fa-check-circle mr-1 text-xs" />
+                  允许所有
                 </span>
               </span>
             </div>
             <div
               v-if="hasClientRestrictions"
-              class="flex flex-wrap gap-2 rounded-lg bg-blue-50 p-2 dark:bg-blue-900/20 md:p-3"
+              class="flex flex-wrap gap-2 pt-2 border-t border-slate-200 dark:border-slate-700"
             >
               <span
                 v-for="client in statsData.restrictions.allowedClients"
                 :key="client"
-                class="flex items-center gap-1 rounded-full bg-white px-2 py-1 text-xs text-blue-700 shadow-sm dark:bg-slate-900 dark:text-blue-300 md:text-sm"
+                class="flex items-center gap-1 rounded-lg bg-white px-2 py-1 text-xs font-medium text-blue-600 border border-blue-100 shadow-sm dark:bg-slate-900 dark:text-blue-300 dark:border-slate-700"
               >
                 <i class="fas fa-id-badge" />
                 {{ client }}
@@ -284,34 +304,34 @@
     </div>
 
     <!-- 详细限制信息 -->
-    <div v-if="hasModelRestrictions" class="card p-4 md:p-6">
+    <div v-if="hasModelRestrictions" class="card-section p-4 md:p-6">
       <h3
-        class="mb-3 flex items-center text-lg font-bold text-gray-900 dark:text-gray-100 md:mb-4 md:text-xl"
+        class="mb-4 flex items-center text-lg font-bold text-slate-900 dark:text-slate-100 md:text-xl"
       >
         <i class="fas fa-list-alt mr-2 text-sm text-amber-500 md:mr-3 md:text-base" />
         详细限制信息
       </h3>
 
       <div
-        class="rounded-lg border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-900/20 md:p-4"
+        class="rounded-xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-800/50 dark:bg-amber-900/20"
       >
         <h4
-          class="mb-2 flex items-center text-sm font-bold text-amber-800 dark:text-amber-300 md:mb-3 md:text-base"
+          class="mb-3 flex items-center text-sm font-bold text-amber-800 dark:text-amber-300"
         >
-          <i class="fas fa-robot mr-1 text-xs md:mr-2 md:text-sm" />
+          <i class="fas fa-robot mr-2" />
           受限模型列表
         </h4>
-        <div class="space-y-1 md:space-y-2">
+        <div class="space-y-2">
           <div
             v-for="model in statsData.restrictions.restrictedModels"
             :key="model"
-            class="rounded border border-amber-200 bg-white px-2 py-1 text-xs dark:border-amber-700 dark:bg-gray-800 md:px-3 md:py-2 md:text-sm"
+            class="rounded-lg border border-amber-100 bg-white px-3 py-2 text-xs shadow-sm dark:border-amber-700/50 dark:bg-slate-800 md:text-sm flex items-center gap-2"
           >
-            <i class="fas fa-ban mr-1 text-xs text-red-500 md:mr-2" />
-            <span class="break-all text-gray-800 dark:text-gray-200">{{ model }}</span>
+            <i class="fas fa-ban text-red-500" />
+            <span class="break-all font-mono text-slate-700 dark:text-slate-200">{{ model }}</span>
           </div>
         </div>
-        <p class="mt-2 text-xs text-amber-700 dark:text-amber-400 md:mt-3">
+        <p class="mt-3 text-xs font-medium text-amber-700 dark:text-amber-400">
           <i class="fas fa-info-circle mr-1" />
           此 API Key 不能访问以上列出的模型
         </p>
@@ -423,39 +443,36 @@ const formatNumber = (num) => {
 </script>
 
 <style scoped>
-/* 卡片样式 - 使用CSS变量 */
-.card {
-  background: var(--surface-color);
-  border-radius: 16px;
-  border: 1px solid var(--border-color);
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.card-section {
+  @apply rounded-3xl border border-white/20 bg-white/80 shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-slate-900/80;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+.card-section:hover {
+  @apply shadow-xl transform -translate-y-0.5;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.15),
-    0 10px 10px -5px rgba(0, 0, 0, 0.08);
+.progress-container {
+  @apply mt-2 h-2.5 w-full rounded-full bg-slate-100 dark:bg-slate-700/50 overflow-hidden border border-slate-200 dark:border-slate-700/50;
 }
 
-:global(.dark) .card:hover {
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.5),
-    0 10px 10px -5px rgba(0, 0, 0, 0.35);
+.progress-track {
+  @apply h-full w-full;
+}
+
+.progress-bar {
+  @apply h-full rounded-full transition-all duration-500 ease-out;
+  background-image: linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+  background-size: 1rem 1rem;
+  animation: progress-stripe 1s linear infinite;
+}
+
+@keyframes progress-stripe {
+  from { background-position: 1rem 0; }
+  to { background-position: 0 0; }
+}
+
+/* 限制项悬停效果 */
+.limit-item {
+  @apply transition-all duration-200 p-2 -mx-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/50;
 }
 </style>

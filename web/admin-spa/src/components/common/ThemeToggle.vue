@@ -41,9 +41,9 @@
         <!-- 切换滑块 -->
         <div class="switch-handle">
           <div class="handle-icon">
-            <i v-if="themeStore.themeMode === 'light'" class="fas fa-sun" />
-            <i v-else-if="themeStore.themeMode === 'dark'" class="fas fa-moon" />
-            <i v-else class="fas fa-adjust" />
+            <i v-if="themeStore.themeMode === 'light'" class="fas fa-sun text-amber-500" />
+            <i v-else-if="themeStore.themeMode === 'dark'" class="fas fa-moon text-indigo-500" />
+            <i v-else class="fas fa-adjust text-blue-500" />
           </div>
         </div>
       </button>
@@ -143,37 +143,28 @@ const selectTheme = (mode) => {
   @apply text-gray-600 dark:text-gray-300;
   @apply border border-gray-200/50 dark:border-gray-600/50;
   @apply transition-all duration-200 ease-out;
-  /* 移除 backdrop-blur 减少 GPU 负担 */
-  @apply shadow-md hover:shadow-lg;
-  @apply hover:scale-110 active:scale-95;
+  @apply shadow-sm hover:shadow-md;
   position: relative;
   overflow: hidden;
 }
 
 /* 简化的 hover 效果 */
-.theme-toggle-button::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
+.theme-toggle-button:hover {
+  transform: translateY(-1px);
 }
 
-.theme-toggle-button:hover::before {
-  opacity: 1;
+.theme-toggle-button:active {
+  transform: translateY(0);
 }
 
 /* 图标样式优化 - 简洁高效 */
 .theme-toggle-button i {
-  @apply text-base;
-  transition: transform 0.2s ease;
+  @apply text-sm;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .theme-toggle-button:hover i {
-  transform: scale(1.1);
+  transform: rotate(15deg) scale(1.1);
 }
 
 /* 不同主题的图标颜色 */
@@ -186,7 +177,7 @@ const selectTheme = (mode) => {
 }
 
 .theme-toggle-button i.fa-adjust {
-  background: linear-gradient(90deg, #60a5fa 0%, #2563eb 100%);
+  background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -199,81 +190,49 @@ const selectTheme = (mode) => {
 
 .theme-switch {
   @apply relative;
-  width: 76px;
-  height: 38px;
-  border-radius: 50px;
-  padding: 4px;
+  width: 68px;
+  height: 34px;
+  border-radius: 20px;
+  padding: 3px;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%); /* 浅色模式背景：清新的蓝色 */
+  border: 2px solid rgba(255, 255, 255, 0.2);
   box-shadow:
-    0 4px 15px rgba(102, 126, 234, 0.3),
-    inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    0 4px 10px rgba(59, 130, 246, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: flex;
   align-items: center;
 }
 
 .theme-switch:hover {
-  transform: scale(1.05);
   box-shadow:
-    0 6px 20px rgba(102, 126, 234, 0.4),
-    inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    0 6px 15px rgba(59, 130, 246, 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
 }
 
 .theme-switch:active {
-  transform: scale(0.98);
+  transform: translateY(0);
 }
 
 /* 深色模式样式 */
 .theme-switch.is-dark {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  border-color: rgba(148, 163, 184, 0.2);
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%); /* 深色模式背景：深邃的靛蓝 */
+  border-color: rgba(255, 255, 255, 0.1);
   box-shadow:
-    0 4px 15px rgba(0, 0, 0, 0.5),
-    inset 0 1px 2px rgba(255, 255, 255, 0.05);
+    0 4px 10px rgba(79, 70, 229, 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.theme-switch.is-dark:hover {
-  box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.6),
-    inset 0 1px 2px rgba(255, 255, 255, 0.05);
-}
-
-/* 自动模式样式 - 静态蓝紫渐变设计（优化版） */
+/* 自动模式样式 */
 .theme-switch.is-auto {
-  background: linear-gradient(
-    135deg,
-    #c4b5fd 0%,
-    /* 更柔和的起始：淡紫 */ #a78bfa 15%,
-    /* 浅紫 */ #818cf8 40%,
-    /* 紫蓝 */ #6366f1 60%,
-    /* 靛蓝 */ #4f46e5 85%,
-    /* 深蓝紫 */ #4338ca 100% /* 更深的结束：深紫 */
-  );
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%); /* 自动模式背景：自然的翠绿 */
   border-color: rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-  background-size: 120% 120%;
-  background-position: center;
   box-shadow:
-    0 4px 15px rgba(139, 92, 246, 0.25),
-    inset 0 1px 3px rgba(0, 0, 0, 0.1),
-    inset 0 -1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* 自动模式的分割线效果 */
-.theme-switch.is-auto::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 10%;
-  bottom: 10%;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transform: translateX(-50%);
-  pointer-events: none;
+    0 4px 10px rgba(16, 185, 129, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* 背景装饰 */
@@ -285,118 +244,31 @@ const selectTheme = (mode) => {
   pointer-events: none;
 }
 
-/* 星星装饰（深色模式） - 优化版 */
-.stars {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.theme-switch.is-dark .stars {
-  opacity: 1;
-}
-
-.stars span {
-  position: absolute;
-  display: block;
-  width: 2px;
-  height: 2px;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.6;
-}
-
-.stars span:nth-child(1) {
-  top: 25%;
-  left: 20%;
-}
-
-.stars span:nth-child(2) {
-  top: 40%;
-  left: 40%;
-  width: 1.5px;
-  height: 1.5px;
-}
-
-.stars span:nth-child(3) {
-  top: 60%;
-  left: 25%;
-}
-
-/* 云朵装饰（浅色模式） - 优化版 */
-.clouds {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.theme-switch:not(.is-dark):not(.is-auto) .clouds {
-  opacity: 0.7;
-}
-
-.clouds span {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 100px;
-}
-
-.clouds span:nth-child(1) {
-  width: 20px;
-  height: 8px;
-  top: 40%;
-  left: 15%;
-}
-
-.clouds span:nth-child(2) {
-  width: 15px;
-  height: 6px;
-  top: 60%;
-  left: 35%;
-}
-
 /* 切换滑块 */
 .switch-handle {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   background: white;
   border-radius: 50%;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 2px 5px rgba(0, 0, 0, 0.2),
     0 0 0 1px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 50%;
-  transform: translateY(-50%) translateX(0);
-  left: 4px;
+  left: 3px; /* 起始位置 */
+  z-index: 2;
 }
 
-/* 深色模式滑块位置 */
+/* 滑块位置 */
 .theme-switch.is-dark .switch-handle {
-  transform: translateY(-50%) translateX(38px);
-  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: translateX(34px); /* 移动距离 = 容器宽度(68) - 滑块宽度(26) - padding(3*2) - offset adjustment */
 }
 
-/* 自动模式滑块位置 - 优化后的半透明设计 */
 .theme-switch.is-auto .switch-handle {
-  transform: translateY(-50%) translateX(19px);
-  background: rgba(255, 255, 255, 0.25);
-  /* 降低 blur 强度，减少 GPU 负担 */
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.1),
-    inset 0 0 8px rgba(255, 255, 255, 0.25);
+  transform: translateX(17px); /* 居中位置 */
 }
 
 /* 滑块图标 */
@@ -410,35 +282,17 @@ const selectTheme = (mode) => {
 }
 
 .handle-icon i {
-  font-size: 14px;
+  font-size: 12px;
   transition: all 0.3s ease;
 }
 
-.handle-icon .fa-sun {
-  color: #f59e0b;
-  filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.5));
-}
-
-.handle-icon .fa-moon {
-  color: #fbbf24;
-  filter: drop-shadow(0 0 3px rgba(251, 191, 36, 0.5));
-}
-
-.handle-icon .fa-adjust {
-  color: rgba(255, 255, 255, 0.9);
-  filter: drop-shadow(0 0 4px rgba(167, 139, 250, 0.5));
-  font-size: 15px;
-}
-
-/* 移除弹跳动画，保持简洁 */
-
-/* 分段按钮样式 - 更现代 */
+/* 分段按钮样式 */
 .theme-segmented {
   @apply inline-flex;
-  @apply bg-gray-100 dark:bg-gray-800;
-  @apply rounded-full p-1;
-  @apply border border-gray-200 dark:border-gray-700;
-  @apply shadow-sm;
+  @apply bg-gray-100/80 dark:bg-gray-800/80;
+  @apply rounded-xl p-1;
+  @apply border border-gray-200/50 dark:border-gray-700/50;
+  @apply backdrop-blur-sm;
 }
 
 .theme-segment {
@@ -446,16 +300,15 @@ const selectTheme = (mode) => {
   @apply text-xs font-medium;
   @apply text-gray-500 dark:text-gray-400;
   @apply transition-all duration-200;
-  @apply rounded-full;
-  @apply flex items-center gap-1;
+  @apply rounded-lg;
+  @apply flex items-center gap-1.5;
   @apply cursor-pointer;
   position: relative;
 }
 
 .theme-segment:hover {
-  @apply text-gray-700 dark:text-gray-300;
-  @apply bg-white/30 dark:bg-gray-600/30;
-  transform: scale(1.02);
+  @apply text-gray-700 dark:text-gray-200;
+  @apply bg-white/50 dark:bg-gray-700/50;
 }
 
 .theme-segment.active {
@@ -466,46 +319,17 @@ const selectTheme = (mode) => {
 
 .theme-segment i {
   @apply text-xs;
-  transition: transform 0.2s ease;
 }
 
 /* 过渡动画 */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-}
-
-.dropdown-enter-active {
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.dropdown-leave-active {
-  transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
-}
-
-.dropdown-enter-from {
-  opacity: 0;
-  transform: translateY(-10px) scale(0.95);
-}
-
-.dropdown-leave-to {
-  opacity: 0;
-  transform: translateY(-5px) scale(0.98);
-}
-
-/* 响应式调整 */
-@media (max-width: 640px) {
-  .theme-dropdown {
-    @apply left-0 right-auto;
-  }
-
-  .theme-segment span {
-    @apply hidden;
-  }
+  transform: scale(0.8) rotate(-15deg);
 }
 </style>

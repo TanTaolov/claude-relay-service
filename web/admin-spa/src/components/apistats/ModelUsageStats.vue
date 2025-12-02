@@ -1,69 +1,92 @@
 <template>
-  <div class="card p-4 md:p-6">
-    <div class="mb-4 md:mb-6">
-      <h3
-        class="flex flex-col text-lg font-bold text-gray-900 dark:text-gray-100 sm:flex-row sm:items-center md:text-xl"
-      >
-        <span class="flex items-center">
-          <i class="fas fa-robot mr-2 text-sm text-indigo-500 md:mr-3 md:text-base" />
-          模型使用统计
-        </span>
-        <span class="text-xs font-normal text-gray-600 dark:text-gray-400 sm:ml-2 md:text-sm"
-          >({{ statsPeriod === 'daily' ? '今日' : '本月' }})</span
-        >
+  <div class="card-section p-4 md:p-6">
+    <div class="mb-6 flex items-center justify-between">
+      <h3 class="flex flex-col text-lg font-bold text-slate-800 dark:text-slate-100 sm:flex-row sm:items-center md:text-xl">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400">
+            <i class="fas fa-robot text-lg" />
+          </div>
+          <div>
+            <span class="block">模型使用统计</span>
+            <span class="block text-xs font-normal text-slate-500 dark:text-slate-400">
+              {{ statsPeriod === 'daily' ? '今日实时数据' : '本月累计数据' }}
+            </span>
+          </div>
+        </div>
       </h3>
+      <div class="rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+        共 {{ modelStats.length }} 个模型
+      </div>
     </div>
 
     <!-- 模型统计加载状态 -->
-    <div v-if="modelStatsLoading" class="py-6 text-center md:py-8">
-      <i
-        class="fas fa-spinner loading-spinner mb-2 text-xl text-gray-600 dark:text-gray-400 md:text-2xl"
-      />
-      <p class="text-sm text-gray-600 dark:text-gray-400 md:text-base">加载模型统计数据中...</p>
+    <div v-if="modelStatsLoading" class="flex flex-col items-center justify-center py-12 text-center">
+      <div class="relative mb-4">
+        <div class="absolute inset-0 animate-ping rounded-full bg-indigo-400 opacity-20"></div>
+        <div class="relative flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400">
+          <i class="fas fa-spinner fa-spin text-xl" />
+        </div>
+      </div>
+      <p class="text-sm font-medium text-slate-600 dark:text-slate-300">正在加载模型统计数据...</p>
     </div>
 
     <!-- 模型统计数据 -->
-    <div v-else-if="modelStats.length > 0" class="space-y-3 md:space-y-4">
-      <div v-for="(model, index) in modelStats" :key="index" class="model-usage-item">
-        <div class="mb-2 flex items-start justify-between md:mb-3">
+    <div v-else-if="modelStats.length > 0" class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
+      <div v-for="(model, index) in modelStats" :key="index" class="model-card group">
+        <!-- 头部：模型名称和总费用 -->
+        <div class="mb-4 flex items-start justify-between gap-4 border-b border-slate-100 pb-4 dark:border-slate-700/50">
           <div class="min-w-0 flex-1">
-            <h4 class="break-all text-base font-bold text-gray-900 dark:text-gray-100 md:text-lg">
-              {{ model.model }}
-            </h4>
-            <p class="text-xs text-gray-600 dark:text-gray-400 md:text-sm">
-              {{ model.requests }} 次请求
+            <div class="flex items-center gap-2">
+              <span class="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-slate-100 text-xs text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+                <i class="fas fa-cube" />
+              </span>
+              <h4 class="break-all font-mono text-sm font-bold text-slate-800 dark:text-slate-100 md:text-base">
+                {{ model.model }}
+              </h4>
+            </div>
+            <p class="mt-1 text-xs text-slate-500 dark:text-slate-400 pl-8">
+              <i class="fas fa-exchange-alt mr-1 text-[10px]"></i>
+              {{ formatNumber(model.requests) }} 次请求
             </p>
           </div>
-          <div class="ml-3 flex-shrink-0 text-right">
-            <div class="text-base font-bold text-green-600 md:text-lg">
+          <div class="flex-shrink-0 text-right">
+            <div class="font-mono text-lg font-bold text-emerald-600 dark:text-emerald-400">
               {{ model.formatted?.total || '$0.000000' }}
             </div>
-            <div class="text-xs text-gray-600 dark:text-gray-400 md:text-sm">总费用</div>
+            <div class="text-[10px] font-medium uppercase tracking-wider text-slate-400">总费用</div>
           </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-2 text-xs md:grid-cols-4 md:gap-3 md:text-sm">
-          <div class="rounded bg-gray-50 p-2 dark:bg-gray-700">
-            <div class="text-gray-600 dark:text-gray-400">输入 Token</div>
-            <div class="font-medium text-gray-900 dark:text-gray-100">
+        <!-- 数据网格 -->
+        <div class="grid grid-cols-2 gap-3">
+          <!-- 输入 Token -->
+          <div class="stat-mini-card bg-amber-50/50 dark:bg-amber-900/10">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-amber-600/70 dark:text-amber-400/70">输入 Token</div>
+            <div class="mt-1 font-mono text-sm font-semibold text-slate-700 dark:text-slate-200">
               {{ formatNumber(model.inputTokens) }}
             </div>
           </div>
-          <div class="rounded bg-gray-50 p-2 dark:bg-gray-700">
-            <div class="text-gray-600 dark:text-gray-400">输出 Token</div>
-            <div class="font-medium text-gray-900 dark:text-gray-100">
+          
+          <!-- 输出 Token -->
+          <div class="stat-mini-card bg-blue-50/50 dark:bg-blue-900/10">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-blue-600/70 dark:text-blue-400/70">输出 Token</div>
+            <div class="mt-1 font-mono text-sm font-semibold text-slate-700 dark:text-slate-200">
               {{ formatNumber(model.outputTokens) }}
             </div>
           </div>
-          <div class="rounded bg-gray-50 p-2 dark:bg-gray-700">
-            <div class="text-gray-600 dark:text-gray-400">缓存创建</div>
-            <div class="font-medium text-gray-900 dark:text-gray-100">
+          
+          <!-- 缓存创建 -->
+          <div class="stat-mini-card bg-purple-50/50 dark:bg-purple-900/10">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-purple-600/70 dark:text-purple-400/70">缓存创建</div>
+            <div class="mt-1 font-mono text-sm font-semibold text-slate-700 dark:text-slate-200">
               {{ formatNumber(model.cacheCreateTokens) }}
             </div>
           </div>
-          <div class="rounded bg-gray-50 p-2 dark:bg-gray-700">
-            <div class="text-gray-600 dark:text-gray-400">缓存读取</div>
-            <div class="font-medium text-gray-900 dark:text-gray-100">
+          
+          <!-- 缓存读取 -->
+          <div class="stat-mini-card bg-emerald-50/50 dark:bg-emerald-900/10">
+            <div class="text-[10px] font-medium uppercase tracking-wider text-emerald-600/70 dark:text-emerald-400/70">缓存读取</div>
+            <div class="mt-1 font-mono text-sm font-semibold text-slate-700 dark:text-slate-200">
               {{ formatNumber(model.cacheReadTokens) }}
             </div>
           </div>
@@ -72,9 +95,11 @@
     </div>
 
     <!-- 无模型数据 -->
-    <div v-else class="py-6 text-center text-gray-500 dark:text-gray-400 md:py-8">
-      <i class="fas fa-chart-pie mb-3 text-2xl md:text-3xl" />
-      <p class="text-sm md:text-base">
+    <div v-else class="flex flex-col items-center justify-center py-12 text-center text-slate-400 dark:text-slate-500">
+      <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-50 text-3xl dark:bg-slate-800/50">
+        <i class="fas fa-chart-pie" />
+      </div>
+      <p class="text-sm md:text-base font-medium">
         暂无{{ statsPeriod === 'daily' ? '今日' : '本月' }}模型使用数据
       </p>
     </div>
@@ -108,113 +133,23 @@ const formatNumber = (num) => {
 </script>
 
 <style scoped>
-/* 卡片样式 - 使用CSS变量 */
-.card {
-  background: var(--surface-color);
-  border-radius: 16px;
-  border: 1px solid var(--border-color);
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.card-section {
+  @apply rounded-3xl border border-white/20 bg-white/80 shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-slate-900/80;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+.model-card {
+  @apply rounded-2xl border border-slate-200/60 bg-white/60 p-5 transition-all duration-300 dark:border-slate-700/60 dark:bg-slate-800/40;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.15),
-    0 10px 10px -5px rgba(0, 0, 0, 0.08);
+.model-card:hover {
+  @apply bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 shadow-lg transform -translate-y-1;
 }
 
-:global(.dark) .card:hover {
-  box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.5),
-    0 10px 10px -5px rgba(0, 0, 0, 0.35);
+.stat-mini-card {
+  @apply rounded-xl p-2.5 transition-colors duration-300 border border-transparent;
 }
 
-/* 模型使用项样式 - 使用CSS变量 */
-.model-usage-item {
-  background: var(--surface-color);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 12px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-@media (min-width: 768px) {
-  .model-usage-item {
-    padding: 16px;
-  }
-}
-
-.model-usage-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-}
-
-.model-usage-item:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-:global(.dark) .model-usage-item:hover {
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.4),
-    0 4px 6px -2px rgba(0, 0, 0, 0.25);
-  border-color: rgba(75, 85, 99, 0.6);
-}
-
-/* 加载动画 */
-.loading-spinner {
-  animation: spin 1s linear infinite;
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* 响应式优化 */
-@media (max-width: 768px) {
-  .model-usage-item .grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .model-usage-item {
-    padding: 10px;
-  }
-
-  .model-usage-item .grid {
-    grid-template-columns: 1fr;
-  }
+.model-card:hover .stat-mini-card {
+  @apply bg-opacity-100 border-black/5 dark:border-white/5;
 }
 </style>

@@ -1,163 +1,245 @@
 <template>
   <div class="space-y-6 md:space-y-8">
     <div
-      class="grid grid-cols-1 items-stretch gap-4 md:gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]"
+      class="grid grid-cols-1 items-start gap-4 md:gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]"
     >
       <!-- 基础信息 / 批量概要 -->
-      <div class="card-section">
+      <div class="card-section h-full">
         <header class="section-header">
-          <i
-            class="header-icon"
-            :class="
-              multiKeyMode
-                ? 'fas fa-layer-group text-purple-500'
-                : 'fas fa-info-circle text-blue-500'
-            "
-          />
-          <h3 class="header-title">{{ multiKeyMode ? '批量查询概要' : 'API Key 信息' }}</h3>
+          <div class="header-icon-wrapper" :class="multiKeyMode ? 'bg-purple-100 dark:bg-purple-900/30' : 'bg-blue-100 dark:bg-blue-900/30'">
+            <i
+              class="header-icon"
+              :class="
+                multiKeyMode
+                  ? 'fas fa-layer-group text-purple-600 dark:text-purple-400'
+                  : 'fas fa-info-circle text-blue-600 dark:text-blue-400'
+              "
+            />
+          </div>
+          <div>
+            <h3 class="header-title">{{ multiKeyMode ? '批量查询概要' : 'API Key 信息' }}</h3>
+            <p class="header-subtitle">{{ multiKeyMode ? '多Key聚合统计数据' : '当前Key的基础信息' }}</p>
+          </div>
         </header>
 
         <div v-if="multiKeyMode && aggregatedStats" class="info-grid">
-          <div class="info-item">
-            <p class="info-label">查询 Keys 数</p>
-            <p class="info-value">{{ aggregatedStats.totalKeys }} 个</p>
+          <div class="info-item group">
+            <div class="info-icon bg-indigo-50 text-indigo-500 dark:bg-indigo-900/20 dark:text-indigo-400">
+              <i class="fas fa-key" />
+            </div>
+            <div>
+              <p class="info-label">查询 Keys 数</p>
+              <p class="info-value">{{ aggregatedStats.totalKeys }} 个</p>
+            </div>
           </div>
-          <div class="info-item">
-            <p class="info-label">有效 Keys 数</p>
-            <p class="info-value text-green-600 dark:text-emerald-400">
-              <i class="fas fa-check-circle mr-1" />{{ aggregatedStats.activeKeys }} 个
-            </p>
+          <div class="info-item group">
+             <div class="info-icon bg-emerald-50 text-emerald-500 dark:bg-emerald-900/20 dark:text-emerald-400">
+              <i class="fas fa-check-circle" />
+            </div>
+            <div>
+              <p class="info-label">有效 Keys 数</p>
+              <p class="info-value text-emerald-600 dark:text-emerald-400">
+                {{ aggregatedStats.activeKeys }} 个
+              </p>
+            </div>
           </div>
-          <div v-if="invalidKeys.length > 0" class="info-item">
-            <p class="info-label">无效 Keys 数</p>
-            <p class="info-value text-red-500 dark:text-red-400">
-              <i class="fas fa-times-circle mr-1" />{{ invalidKeys.length }} 个
-            </p>
+          <div v-if="invalidKeys.length > 0" class="info-item group">
+             <div class="info-icon bg-red-50 text-red-500 dark:bg-red-900/20 dark:text-red-400">
+              <i class="fas fa-times-circle" />
+            </div>
+            <div>
+              <p class="info-label">无效 Keys 数</p>
+              <p class="info-value text-red-500 dark:text-red-400">
+                {{ invalidKeys.length }} 个
+              </p>
+            </div>
           </div>
-          <div class="info-item">
-            <p class="info-label">总请求数</p>
-            <p class="info-value">{{ formatNumber(aggregatedStats.usage.requests) }}</p>
+          <div class="info-item group">
+             <div class="info-icon bg-blue-50 text-blue-500 dark:bg-blue-900/20 dark:text-blue-400">
+              <i class="fas fa-exchange-alt" />
+            </div>
+            <div>
+              <p class="info-label">总请求数</p>
+              <p class="info-value">{{ formatNumber(aggregatedStats.usage.requests) }}</p>
+            </div>
           </div>
-          <div class="info-item">
-            <p class="info-label">总 Token 数</p>
-            <p class="info-value">{{ formatNumber(aggregatedStats.usage.allTokens) }}</p>
+          <div class="info-item group">
+             <div class="info-icon bg-violet-50 text-violet-500 dark:bg-violet-900/20 dark:text-violet-400">
+              <i class="fas fa-coins" />
+            </div>
+            <div>
+              <p class="info-label">总 Token 数</p>
+              <p class="info-value">{{ formatNumber(aggregatedStats.usage.allTokens) }}</p>
+            </div>
           </div>
-          <div class="info-item">
-            <p class="info-label">总费用</p>
-            <p class="info-value text-indigo-600 dark:text-indigo-300">
-              {{ aggregatedStats.usage.formattedCost }}
-            </p>
+          <div class="info-item group">
+             <div class="info-icon bg-amber-50 text-amber-500 dark:bg-amber-900/20 dark:text-amber-400">
+              <i class="fas fa-dollar-sign" />
+            </div>
+            <div>
+              <p class="info-label">总费用</p>
+              <p class="info-value text-indigo-600 dark:text-indigo-300">
+                {{ aggregatedStats.usage.formattedCost }}
+              </p>
+            </div>
           </div>
-          <div v-if="individualStats.length > 1" class="info-item xl:col-span-2">
+          <div v-if="individualStats.length > 1" class="info-item xl:col-span-2 !flex-col !items-start gap-3">
             <p class="info-label">Top 3 贡献占比</p>
-            <div class="space-y-2">
+            <div class="w-full space-y-2">
               <div v-for="stat in topContributors" :key="stat.apiId" class="contributor-item">
-                <span class="truncate">{{ stat.name }}</span>
-                <span class="font-semibold">{{ calculateContribution(stat) }}%</span>
+                <div class="flex items-center gap-2 min-w-0">
+                  <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                  <span class="truncate text-xs font-medium">{{ stat.name }}</span>
+                </div>
+                <span class="font-mono text-xs font-bold text-slate-700 dark:text-slate-200">{{ calculateContribution(stat) }}%</span>
               </div>
             </div>
           </div>
         </div>
 
         <div v-else class="info-grid">
-          <div class="info-item">
-            <p class="info-label">名称</p>
-            <p class="info-value break-all">{{ statsData.name }}</p>
+          <div class="info-item group">
+             <div class="info-icon bg-slate-50 text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+              <i class="fas fa-signature" />
+            </div>
+            <div class="min-w-0">
+              <p class="info-label">名称</p>
+              <p class="info-value truncate" :title="statsData.name">{{ statsData.name }}</p>
+            </div>
           </div>
-          <div class="info-item">
-            <p class="info-label">状态</p>
-            <p
-              class="info-value font-semibold"
-              :class="
-                statsData.isActive
-                  ? 'text-green-600 dark:text-emerald-400'
-                  : 'text-red-500 dark:text-red-400'
-              "
-            >
-              <i
-                class="mr-1"
-                :class="statsData.isActive ? 'fas fa-check-circle' : 'fas fa-times-circle'"
-              />
-              {{ statsData.isActive ? '活跃' : '已停用' }}
-            </p>
+          <div class="info-item group">
+             <div class="info-icon" :class="statsData.isActive ? 'bg-emerald-50 text-emerald-500 dark:bg-emerald-900/20 dark:text-emerald-400' : 'bg-red-50 text-red-500 dark:bg-red-900/20 dark:text-red-400'">
+              <i :class="statsData.isActive ? 'fas fa-check-circle' : 'fas fa-times-circle'" />
+            </div>
+            <div>
+              <p class="info-label">状态</p>
+              <p
+                class="info-value font-semibold"
+                :class="
+                  statsData.isActive
+                    ? 'text-emerald-600 dark:text-emerald-400'
+                    : 'text-red-500 dark:text-red-400'
+                "
+              >
+                {{ statsData.isActive ? '活跃' : '已停用' }}
+              </p>
+            </div>
           </div>
-          <div class="info-item">
-            <p class="info-label">权限</p>
-            <p class="info-value">{{ formatPermissions(statsData.permissions) }}</p>
+          <div class="info-item group">
+             <div class="info-icon bg-indigo-50 text-indigo-500 dark:bg-indigo-900/20 dark:text-indigo-400">
+              <i class="fas fa-shield-alt" />
+            </div>
+            <div>
+              <p class="info-label">权限</p>
+              <p class="info-value">{{ formatPermissions(statsData.permissions) }}</p>
+            </div>
           </div>
-          <div class="info-item">
-            <p class="info-label">创建时间</p>
-            <p class="info-value break-all">{{ formatDate(statsData.createdAt) }}</p>
+          <div class="info-item group">
+             <div class="info-icon bg-blue-50 text-blue-500 dark:bg-blue-900/20 dark:text-blue-400">
+              <i class="fas fa-calendar-plus" />
+            </div>
+            <div>
+              <p class="info-label">创建时间</p>
+              <p class="info-value text-xs">{{ formatDate(statsData.createdAt) }}</p>
+            </div>
           </div>
-          <div class="info-item xl:col-span-2">
-            <p class="info-label">过期时间</p>
-            <div class="info-value">
-              <template v-if="statsData.expirationMode === 'activation' && !statsData.isActivated">
-                <span class="text-amber-600 dark:text-amber-400">
-                  <i class="fas fa-pause-circle mr-1" />未激活
-                </span>
-                <span class="ml-2 text-xs text-gray-500 dark:text-gray-400">
-                  首次使用后
-                  {{ statsData.activationDays || (statsData.activationUnit === 'hours' ? 24 : 30) }}
-                  {{ statsData.activationUnit === 'hours' ? '小时' : '天' }}过期
-                </span>
-              </template>
-              <template v-else-if="statsData.expiresAt">
-                <span
-                  v-if="isApiKeyExpired(statsData.expiresAt)"
-                  class="text-red-500 dark:text-red-400"
-                >
-                  <i class="fas fa-exclamation-circle mr-1" />已过期
-                </span>
-                <span
-                  v-else-if="isApiKeyExpiringSoon(statsData.expiresAt)"
-                  class="text-orange-500 dark:text-orange-400"
-                >
-                  <i class="fas fa-clock mr-1" />{{ formatExpireDate(statsData.expiresAt) }}
-                </span>
-                <span v-else>{{ formatExpireDate(statsData.expiresAt) }}</span>
-              </template>
-              <template v-else>
-                <span class="text-gray-400 dark:text-gray-500">
-                  <i class="fas fa-infinity mr-1" />永不过期
-                </span>
-              </template>
+          <div class="info-item xl:col-span-2 group">
+             <div class="info-icon bg-amber-50 text-amber-500 dark:bg-amber-900/20 dark:text-amber-400">
+              <i class="fas fa-hourglass-half" />
+            </div>
+            <div>
+              <p class="info-label">过期时间</p>
+              <div class="info-value">
+                <template v-if="statsData.expirationMode === 'activation' && !statsData.isActivated">
+                  <span class="text-amber-600 dark:text-amber-400 font-medium">
+                    <i class="fas fa-pause-circle mr-1" />未激活
+                  </span>
+                  <span class="ml-2 text-xs text-gray-500 dark:text-gray-400">
+                    (首次使用后 {{ statsData.activationDays || (statsData.activationUnit === 'hours' ? 24 : 30) }}{{ statsData.activationUnit === 'hours' ? '小时' : '天' }}过期)
+                  </span>
+                </template>
+                <template v-else-if="statsData.expiresAt">
+                  <span
+                    v-if="isApiKeyExpired(statsData.expiresAt)"
+                    class="text-red-500 dark:text-red-400 font-medium"
+                  >
+                    <i class="fas fa-exclamation-circle mr-1" />已过期
+                  </span>
+                  <span
+                    v-else-if="isApiKeyExpiringSoon(statsData.expiresAt)"
+                    class="text-orange-500 dark:text-orange-400 font-medium"
+                  >
+                    <i class="fas fa-clock mr-1" />{{ formatExpireDate(statsData.expiresAt) }}
+                  </span>
+                  <span v-else>{{ formatExpireDate(statsData.expiresAt) }}</span>
+                </template>
+                <template v-else>
+                  <span class="text-emerald-600 dark:text-emerald-400 font-medium">
+                    <i class="fas fa-infinity mr-1" />永不过期
+                  </span>
+                </template>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- 使用统计概览 -->
-      <div class="card-section">
+      <div class="card-section h-full">
         <header class="section-header">
-          <i class="header-icon fas fa-chart-bar text-green-500" />
-          <h3 class="header-title">使用统计概览</h3>
-          <span class="header-tag">{{ statsPeriod === 'daily' ? '今日' : '本月' }}</span>
+          <div class="header-icon-wrapper bg-green-100 dark:bg-green-900/30">
+            <i class="header-icon fas fa-chart-bar text-green-600 dark:text-green-400" />
+          </div>
+          <div>
+            <h3 class="header-title">使用统计概览</h3>
+            <p class="header-subtitle">{{ statsPeriod === 'daily' ? '今日实时数据' : '本月累计数据' }}</p>
+          </div>
+          <span class="header-tag ml-auto">{{ statsPeriod === 'daily' ? '今日' : '本月' }}</span>
         </header>
         <div class="metric-grid">
-          <div class="metric-card">
-            <p class="metric-value text-green-600 dark:text-emerald-300">
-              {{ formatNumber(currentPeriodData.requests) }}
-            </p>
-            <p class="metric-label">{{ statsPeriod === 'daily' ? '今日' : '本月' }}请求数</p>
+          <div class="metric-card group">
+            <div class="metric-icon-wrapper bg-emerald-50 text-emerald-500 dark:bg-emerald-900/20 dark:text-emerald-400">
+              <i class="fas fa-exchange-alt" />
+            </div>
+            <div class="metric-content">
+              <p class="metric-value text-emerald-600 dark:text-emerald-400">
+                {{ formatNumber(currentPeriodData.requests) }}
+              </p>
+              <p class="metric-label">总请求数</p>
+            </div>
           </div>
-          <div class="metric-card">
-            <p class="metric-value text-blue-600 dark:text-sky-300">
-              {{ formatNumber(currentPeriodData.allTokens) }}
-            </p>
-            <p class="metric-label">{{ statsPeriod === 'daily' ? '今日' : '本月' }}Token 数</p>
+          <div class="metric-card group">
+            <div class="metric-icon-wrapper bg-blue-50 text-blue-500 dark:bg-blue-900/20 dark:text-blue-400">
+              <i class="fas fa-coins" />
+            </div>
+            <div class="metric-content">
+              <p class="metric-value text-blue-600 dark:text-blue-400">
+                {{ formatNumber(currentPeriodData.allTokens) }}
+              </p>
+              <p class="metric-label">总Token数</p>
+            </div>
           </div>
-          <div class="metric-card">
-            <p class="metric-value text-purple-600 dark:text-violet-300">
-              {{ currentPeriodData.formattedCost || '$0.000000' }}
-            </p>
-            <p class="metric-label">{{ statsPeriod === 'daily' ? '今日' : '本月' }}费用</p>
+          <div class="metric-card group">
+            <div class="metric-icon-wrapper bg-violet-50 text-violet-500 dark:bg-violet-900/20 dark:text-violet-400">
+              <i class="fas fa-dollar-sign" />
+            </div>
+            <div class="metric-content">
+              <p class="metric-value text-violet-600 dark:text-violet-400">
+                {{ currentPeriodData.formattedCost || '$0.000000' }}
+              </p>
+              <p class="metric-label">预估费用</p>
+            </div>
           </div>
-          <div class="metric-card">
-            <p class="metric-value text-amber-500 dark:text-amber-300">
-              {{ formatNumber(currentPeriodData.inputTokens) }}
-            </p>
-            <p class="metric-label">{{ statsPeriod === 'daily' ? '今日' : '本月' }}输入 Token</p>
+          <div class="metric-card group">
+            <div class="metric-icon-wrapper bg-amber-50 text-amber-500 dark:bg-amber-900/20 dark:text-amber-400">
+              <i class="fas fa-arrow-right" />
+            </div>
+            <div class="metric-content">
+              <p class="metric-value text-amber-600 dark:text-amber-400">
+                {{ formatNumber(currentPeriodData.inputTokens) }}
+              </p>
+              <p class="metric-label">输入Token</p>
+            </div>
           </div>
         </div>
       </div>
@@ -166,21 +248,29 @@
     <!-- 专属账号运行状态，仅在单 key 且存在绑定时显示 -->
     <div v-if="!multiKeyMode && boundAccountList.length > 0" class="card-section">
       <header class="section-header">
-        <i class="header-icon fas fa-plug text-indigo-500" />
-        <h3 class="header-title">专属账号运行状态</h3>
-        <span class="header-tag">实时更新</span>
+        <div class="header-icon-wrapper bg-indigo-100 dark:bg-indigo-900/30">
+          <i class="header-icon fas fa-plug text-indigo-600 dark:text-indigo-400" />
+        </div>
+        <div>
+          <h3 class="header-title">专属账号运行状态</h3>
+          <p class="header-subtitle">实时绑定的后端账号状态</p>
+        </div>
+        <span class="header-tag ml-auto">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse mr-1 inline-block"></span>
+            实时更新
+        </span>
       </header>
 
-      <div class="grid grid-cols-1 gap-4" :class="accountGridClass">
+      <div class="grid grid-cols-1 gap-4 md:gap-6" :class="accountGridClass">
         <div
           v-for="account in boundAccountList"
           :key="account.id || account.key"
-          class="account-card"
+          class="account-card group"
         >
-          <div class="flex items-center justify-between gap-3">
+          <div class="flex items-center justify-between gap-3 mb-4">
             <div class="flex items-center gap-3">
               <span
-                class="account-icon"
+                class="account-icon shadow-lg shadow-indigo-500/20"
                 :class="account.platform === 'claude' ? 'icon-claude' : 'icon-openai'"
               >
                 <i :class="account.platform === 'claude' ? 'fas fa-meteor' : 'fas fa-robot'" />
@@ -201,11 +291,15 @@
             </div>
           </div>
 
-          <div v-if="account.platform === 'claude'" class="mt-3 space-y-2">
-            <div class="progress-row">
+          <div v-if="account.platform === 'claude'" class="mt-3 space-y-3">
+            <div class="progress-container">
+              <div class="flex justify-between text-xs mb-1">
+                <span class="text-slate-500 dark:text-slate-400 font-medium">窗口使用率</span>
+                <span class="font-bold text-slate-700 dark:text-slate-200">{{ Math.min(100, Math.max(0, Math.round(account.sessionWindow?.progress || 0))) }}%</span>
+              </div>
               <div class="progress-track">
                 <div
-                  class="progress-bar"
+                  class="progress-bar shadow-sm"
                   :class="
                     getSessionProgressBarClass(account.sessionWindow?.sessionWindowStatus, account)
                   "
@@ -214,22 +308,22 @@
                   }"
                 />
               </div>
-              <span class="progress-value">
-                {{ Math.min(100, Math.max(0, Math.round(account.sessionWindow?.progress || 0))) }}%
-              </span>
             </div>
-            <div class="flex flex-wrap items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
-              <span>
-                {{
-                  formatSessionWindowRange(
-                    account.sessionWindow?.windowStart,
-                    account.sessionWindow?.windowEnd
-                  )
-                }}
-              </span>
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 rounded-lg p-2">
+              <div class="flex items-center gap-1.5">
+                <i class="far fa-clock"></i>
+                <span>
+                  {{
+                    formatSessionWindowRange(
+                      account.sessionWindow?.windowStart,
+                      account.sessionWindow?.windowEnd
+                    )
+                  }}
+                </span>
+              </div>
               <span
                 v-if="account.sessionWindow?.remainingTime > 0"
-                class="font-medium text-indigo-600 dark:text-indigo-400"
+                class="font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 px-2 py-0.5 rounded"
               >
                 剩余 {{ formatSessionRemaining(account.sessionWindow.remainingTime) }}
               </span>
@@ -237,7 +331,7 @@
           </div>
 
           <div v-else-if="account.platform === 'openai'" class="mt-3">
-            <div v-if="account.codexUsage" class="space-y-2">
+            <div v-if="account.codexUsage" class="space-y-3">
               <div
                 v-for="type in ['primary', 'secondary']"
                 :key="`${account.key}-${type}`"
@@ -251,24 +345,25 @@
                     {{ formatCodexUsagePercent(account.codexUsage?.[type]) }}
                   </span>
                 </div>
-                <div class="progress-track">
+                <div class="progress-track mt-2">
                   <div
-                    class="progress-bar"
+                    class="progress-bar shadow-sm"
                     :class="getCodexUsageBarClass(account.codexUsage?.[type])"
                     :style="{ width: getCodexUsageWidth(account.codexUsage?.[type]) }"
                   />
                 </div>
                 <div class="quota-foot">
+                  <i class="fas fa-history mr-1"></i>
                   重置剩余 {{ formatCodexRemaining(account.codexUsage?.[type]) }}
                 </div>
               </div>
             </div>
-            <p
+            <div
               v-else
-              class="rounded-xl bg-slate-100 px-3 py-2 text-xs text-slate-500 dark:bg-slate-800 dark:text-slate-300"
+              class="rounded-xl bg-slate-50 px-4 py-3 text-center text-xs text-slate-500 dark:bg-slate-800 dark:text-slate-400 border border-dashed border-slate-200 dark:border-slate-700"
             >
               暂无额度使用数据
-            </p>
+            </div>
           </div>
         </div>
       </div>
@@ -510,31 +605,43 @@ const getCodexWindowLabel = (type) => (type === 'secondary' ? '周限' : '5h')
 
 <style scoped>
 .card-section {
-  @apply flex h-full flex-col gap-4 rounded-2xl border border-slate-200/70 bg-white/90 p-4 shadow-md dark:border-slate-700/60 dark:bg-slate-900/70 md:p-6;
+  @apply flex h-full flex-col rounded-3xl border border-white/20 bg-white/80 p-6 shadow-lg backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-slate-900/80;
 }
 
-:global(.dark) .card-section {
-  backdrop-filter: blur(10px);
+.card-section:hover {
+  @apply shadow-xl transform -translate-y-0.5;
 }
 
 .section-header {
-  @apply mb-4 flex items-center gap-3;
+  @apply mb-6 flex items-center gap-4;
+}
+
+.header-icon-wrapper {
+  @apply flex h-12 w-12 items-center justify-center rounded-2xl transition-transform duration-300;
+}
+
+.card-section:hover .header-icon-wrapper {
+  @apply scale-110 rotate-3;
 }
 
 .header-icon {
-  @apply text-base md:text-lg;
+  @apply text-xl;
 }
 
 .header-title {
-  @apply text-lg font-semibold text-slate-900 dark:text-slate-100 md:text-xl;
+  @apply text-lg font-bold text-slate-800 dark:text-slate-100;
+}
+
+.header-subtitle {
+  @apply text-xs text-slate-500 dark:text-slate-400 mt-0.5;
 }
 
 .header-tag {
-  @apply ml-auto rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-300;
+  @apply rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700;
 }
 
 .info-grid {
-  @apply grid gap-3 md:gap-4;
+  @apply grid gap-4;
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
@@ -551,107 +658,142 @@ const getCodexWindowLabel = (type) => (type === 'secondary' ? '周限' : '5h')
 }
 
 .info-item {
-  @apply rounded-xl border border-slate-200 bg-white/70 p-4 dark:border-slate-700 dark:bg-slate-900/60;
-  min-height: 86px;
+  @apply flex items-center gap-3 rounded-2xl border border-slate-200/50 bg-white/50 p-4 transition-all duration-300 dark:border-slate-700/50 dark:bg-slate-800/40;
+}
+
+.info-item:hover {
+  @apply bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 shadow-sm;
+}
+
+.info-icon {
+  @apply flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl transition-all duration-300;
+}
+
+.info-item:hover .info-icon {
+  @apply scale-110;
 }
 
 .info-label {
-  @apply text-xs uppercase tracking-wide text-slate-400;
+  @apply text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400;
 }
 
 .info-value {
-  @apply mt-2 font-mono text-sm text-slate-800 dark:text-slate-100;
+  @apply mt-0.5 font-mono text-sm font-semibold text-slate-800 dark:text-slate-100;
 }
 
 .contributor-item {
-  @apply flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300;
+  @apply flex items-center justify-between rounded-lg bg-slate-50/80 px-3 py-2 text-slate-600 dark:bg-slate-800/80 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors;
 }
 
 .metric-grid {
-  @apply grid grid-cols-2 gap-3 md:gap-4;
+  @apply grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4;
 }
 
 .metric-card {
-  @apply rounded-xl border border-slate-200 bg-white/70 p-4 text-center shadow-sm dark:border-slate-700 dark:bg-slate-900/60;
+  @apply flex flex-col items-center justify-center gap-3 rounded-2xl border border-slate-200/50 bg-white/50 p-6 text-center transition-all duration-300 dark:border-slate-700/50 dark:bg-slate-800/40;
+}
+
+.metric-card:hover {
+  @apply bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 shadow-md transform -translate-y-1;
+}
+
+.metric-icon-wrapper {
+  @apply flex h-12 w-12 items-center justify-center rounded-2xl text-xl mb-1 transition-all duration-300;
+}
+
+.metric-card:hover .metric-icon-wrapper {
+  @apply scale-110 rotate-6;
 }
 
 .metric-value {
-  @apply font-mono text-xl font-semibold md:text-2xl;
+  @apply font-mono text-xl font-bold tracking-tight md:text-2xl;
 }
 
 .metric-label {
-  @apply mt-1 text-xs text-slate-500 dark:text-slate-300;
+  @apply text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide;
 }
 
 .account-card {
-  @apply rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm transition-shadow hover:shadow-md dark:border-slate-700 dark:bg-slate-900/60;
+  @apply rounded-2xl border border-slate-200/50 bg-white/60 p-5 shadow-sm transition-all duration-300 dark:border-slate-700/50 dark:bg-slate-800/50;
+}
+
+.account-card:hover {
+  @apply bg-white dark:bg-slate-800 shadow-md border-slate-300 dark:border-slate-600;
 }
 
 .account-icon {
-  @apply inline-flex h-10 w-10 items-center justify-center rounded-full text-white;
+  @apply inline-flex h-12 w-12 items-center justify-center rounded-2xl text-white text-lg transition-transform duration-300;
+}
+
+.account-card:hover .account-icon {
+  @apply scale-110 rotate-3;
 }
 
 .icon-claude {
-  @apply bg-gradient-to-br from-purple-500 to-purple-600;
+  @apply bg-gradient-to-br from-orange-500 to-red-600;
 }
 
 .icon-openai {
-  @apply bg-gradient-to-br from-sky-500 to-indigo-500;
+  @apply bg-gradient-to-br from-teal-400 to-emerald-600;
 }
 
 .account-name {
-  @apply text-sm font-semibold text-slate-900 dark:text-slate-100;
+  @apply text-base font-bold text-slate-800 dark:text-slate-100;
 }
 
 .account-sub {
-  @apply text-xs text-slate-500 dark:text-slate-400;
+  @apply text-xs font-medium text-slate-500 dark:text-slate-400;
 }
 
 .rate-badge {
-  @apply rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium dark:bg-slate-800;
+  @apply rounded-full px-3 py-1 text-xs font-bold shadow-sm backdrop-blur-sm;
 }
 
-.progress-row {
-  @apply flex items-center gap-2;
+.progress-container {
+  @apply mb-2;
 }
 
 .progress-track {
-  @apply h-1.5 flex-1 rounded-full bg-slate-200 dark:bg-slate-700;
+  @apply h-2.5 w-full rounded-full bg-slate-100 dark:bg-slate-700/50 overflow-hidden border border-slate-200 dark:border-slate-700/50;
 }
 
 .progress-bar {
-  @apply h-1.5 rounded-full transition-all duration-300;
+  @apply h-full rounded-full transition-all duration-500 ease-out;
+  background-image: linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+  background-size: 1rem 1rem;
+  animation: progress-stripe 1s linear infinite;
 }
 
-.progress-value {
-  @apply text-xs font-semibold text-slate-600 dark:text-slate-200;
+@keyframes progress-stripe {
+  from { background-position: 1rem 0; }
+  to { background-position: 0 0; }
 }
 
 .quota-row {
-  @apply rounded-xl border border-slate-200 bg-white/60 p-3 dark:border-slate-700 dark:bg-slate-900/50;
+  @apply rounded-xl border border-slate-100 bg-slate-50/50 p-3 dark:border-slate-700/30 dark:bg-slate-800/30 transition-colors hover:bg-white dark:hover:bg-slate-800;
 }
 
 .quota-header {
-  @apply mb-2 flex items-center justify-between;
+  @apply flex items-center justify-between mb-1;
 }
 
 .quota-tag {
-  @apply inline-flex min-w-[34px] justify-center rounded-full px-2 py-0.5 text-[11px] font-semibold;
+  @apply inline-flex items-center justify-center rounded-lg px-2 py-1 text-[10px] font-bold uppercase tracking-wider;
 }
 
 .tag-indigo {
-  @apply bg-indigo-100 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-200;
+  @apply bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300;
 }
 
 .tag-blue {
-  @apply bg-sky-100 text-sky-600 dark:bg-sky-500/20 dark:text-sky-200;
+  @apply bg-sky-100 text-sky-600 dark:bg-sky-900/30 dark:text-sky-300;
 }
 
 .quota-percent {
-  @apply text-xs font-semibold text-slate-600 dark:text-slate-200;
+  @apply font-mono text-xs font-bold text-slate-700 dark:text-slate-200;
 }
 
 .quota-foot {
-  @apply mt-1 text-[11px] text-slate-400 dark:text-slate-300;
+  @apply mt-2 flex items-center justify-end text-[10px] font-medium text-slate-400 dark:text-slate-500;
 }
 </style>

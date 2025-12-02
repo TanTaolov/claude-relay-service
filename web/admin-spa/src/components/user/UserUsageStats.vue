@@ -215,10 +215,7 @@
     </div>
 
     <!-- Model Usage Breakdown -->
-    <div
-      v-if="!loading && usageStats && usageStats.modelStats?.length > 0"
-      class="modern-card"
-    >
+    <div v-if="!loading && usageStats && usageStats.modelStats?.length > 0" class="modern-card">
       <div class="px-4 py-5 sm:p-6">
         <h3 class="mb-4 text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
           Usage by Model
@@ -251,10 +248,7 @@
     </div>
 
     <!-- Detailed Usage Table -->
-    <div
-      v-if="!loading && userApiKeys.length > 0"
-      class="modern-card"
-    >
+    <div v-if="!loading && userApiKeys.length > 0" class="modern-card">
       <div class="px-4 py-5 sm:p-6">
         <h3 class="mb-4 text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
           Usage by API Key

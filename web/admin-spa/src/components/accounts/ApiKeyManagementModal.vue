@@ -64,9 +64,7 @@
           <!-- 菜单栏 -->
           <div class="mb-4 space-y-3">
             <!-- 工具栏：筛选、搜索和操作 -->
-            <div
-              class="modern-card p-3"
-            >
+            <div class="modern-card p-3">
               <!-- 第一行：筛选和搜索 -->
               <div class="mb-3 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                 <!-- 左侧：状态筛选 -->
@@ -222,7 +220,7 @@
             <div
               v-for="(apiKey, index) in paginatedApiKeys"
               :key="index"
-              class="relative modern-card p-4"
+              class="modern-card relative p-4"
             >
               <!-- 左上角错误状态码角标 -->
               <div
